@@ -267,9 +267,24 @@ return IsPlayerWhitelisted
 	end    
 })
 
---Player Tab End--
+MainSection:Button({
+		Name = "Katana Script"
+		Callback = function()
+			local hook; hook = hookmetamethod(game, "__namecall", function(self, ...)
+    local args = {...}
+    local method = getnamecallmethod()
 
---Settings Tab--
+    if tostring(self) == "RemoteEvent" and method == "FireServer" then
+        if args[1] == "2" and game.FindFirstChild(game.Players, args[2].Parent.Name) then
+            args[2] = args[2].Parent.Head
+            return hook(self, unpack(args))
+        end
+    end
+
+    return hook(self, ...)
+end)
+			end
+})
 
 local SettingsTab = Window:MakeTab({
 	Name = "Settings",
