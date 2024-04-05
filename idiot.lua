@@ -283,7 +283,7 @@ MainSection:AddButton({
 
     return hook(self, ...)
 end)
-			end
+	end
 })
 
 local SettingsTab = Window:MakeTab({
