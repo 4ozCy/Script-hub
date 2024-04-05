@@ -268,9 +268,9 @@ return IsPlayerWhitelisted
 })
 
 MainSection:AddButton({
-         Name = "Katana Script"
-	 Callback = function()
-			local hook; hook = hookmetamethod(game, "__namecall", function(self, ...)
+        Name = "Katana Script"
+	Callback = function()
+		 local hook; hook = hookmetamethod(game, "__namecall", function(self, ...)
     local args = {...}
     local method = getnamecallmethod()
 
