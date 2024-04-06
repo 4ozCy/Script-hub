@@ -18,12 +18,7 @@ local MainTab = Window:MakeTab({
 	PremiumOnly = false
 })
 
-local MainSection = MainTab:AddSection({
-	Name = "Main"
-})
-
-
-MainSection:AddButton({
+MainTab:AddButton({
 	Name = "fling all",
 	Callback = function()
                print("Before the while loop")
@@ -271,10 +266,6 @@ local SettingsTab = Window:MakeTab({
 	Name = "Settings",
 	Icon = "rbxassetid://4483345998",
 	PremiumOnly = false
-})
-
-local SettingsSection = SettingsTab:AddSection({
-	Name = "Settings"
 })
 
 SettingsSection:AddButton({
