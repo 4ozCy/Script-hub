@@ -268,7 +268,7 @@ local SettingsTab = Window:MakeTab({
 	PremiumOnly = false
 })
 
-SettingsSection:AddButton({
+SettingsTab:AddButton({
 	Name = "Destroy UI",
 	Callback = function()
         OrionLib:Destroy()
