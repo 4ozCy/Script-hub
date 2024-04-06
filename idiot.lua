@@ -262,7 +262,7 @@ return IsPlayerWhitelisted
 	end    
 })
 
-SettingsTab:AddButton({
+MainTab:AddButton({
 	Name = "Crash server (Need btools)",
 	Callback = function()
         local runService = game:GetService("RunService")
