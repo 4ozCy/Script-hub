@@ -263,7 +263,7 @@ return IsPlayerWhitelisted
 })
 
 MainTab:AddButton({
-	Name = "Crash server (Need btools)",
+	Name = "Crash server (Most Equip Btools)",
 	Callback = function()
         local runService = game:GetService("RunService")
 local localPlayer = game:GetService("Players").LocalPlayer
@@ -496,6 +496,52 @@ local function QNWNII_fake_script() -- Frame.LocalScript
 	script.Parent.Draggable = true
 end
 coroutine.wrap(QNWNII_fake_script)()
+  	end    
+})
+
+MainTab:AddButton({
+	Name = "Kill all (Most Equip Sword)",
+	Callback = function()
+        local RunService = game:GetService("RunService")
+local Players = game:GetService("Players")
+
+-- Function to get all players in the game
+local function getAllPlayers()
+    local allPlayers = {}
+    for _, player in ipairs(Players:GetPlayers()) do
+        table.insert(allPlayers, player.Name)
+    end
+    return allPlayers
+end
+
+local speaker = Players.LocalPlayer -- Assuming 'LocalPlayer' is the speaker
+local Tool = speaker.Character:FindFirstChildWhichIsA("Tool")
+local Handle = Tool and Tool:FindFirstChild("Handle")
+
+if not Tool or not Handle then
+    return
+end
+
+for _, playerName in ipairs(getAllPlayers()) do
+    local player = Players:FindFirstChild(playerName)
+    if player then
+        task.spawn(function()
+            while Tool and speaker.Character and player.Character and Tool.Parent == speaker.Character do
+                local Humanoid = player.Character:FindFirstChildWhichIsA("Humanoid")
+                if not Humanoid or Humanoid.Health <= 0 then
+                    break
+                end
+                for _, part in ipairs(player.Character:GetChildren()) do
+                    if part:IsA("BasePart") then
+                        firetouchinterest(Handle, part, 1)
+                        RunService.RenderStepped:Wait()
+                        firetouchinterest(Handle, part, 0)
+                    end
+                end
+            end
+        end)
+    end
+			end
   	end    
 })
         
