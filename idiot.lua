@@ -303,25 +303,6 @@ end)
 })
 
 MainTab:AddButton({
-	Name = "Katana Scrip",
-	Callback = function()
-        local hook; hook = hookmetamethod(game, "__namecall", function(self, ...)
-    local args = {...}
-    local method = getnamecallmethod()
-
-    if tostring(self) == "RemoteEvent" and method == "FireServer" then
-        if args[1] == "2" and game.FindFirstChild(game.Players, args[2].Parent.Name) then
-            args[2] = args[2].Parent.Head
-            return hook(self, unpack(args))
-        end
-    end
-
-    return hook(self, ...)
-end)
-  	end    
-})
-
-MainTab:AddButton({
 	Name = "Rizz Script",
 	Callback = function()
         local cloneref = clonereference or cloneref
