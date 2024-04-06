@@ -302,7 +302,7 @@ end)
   	end    
 })
 
-MaimTab:AddButton({
+MainTab:AddButton({
 	Name = "Katana Scrip",
 	Callback = function()
         local hook; hook = hookmetamethod(game, "__namecall", function(self, ...)
