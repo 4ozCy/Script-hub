@@ -282,7 +282,7 @@ MainSection:AddButton({
     end
 
     return hook(self, ...)
-end)
+end
 	 end
 })
 
