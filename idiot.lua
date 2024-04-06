@@ -346,7 +346,7 @@ local Packages = {
 }
 
 
-local Window = Packages.RayfiRiRizteWindow({
+local Window = Packages.Rayfield:CreateWindow({
     Name = "idiot hub rizz",
     LoadingTitle = "idiot hub rizz",
     LoadingSubtitle = "by Denzo",
