@@ -305,7 +305,26 @@ end)
 MainTab:AddButton({
 	Name = "Rizz script",
 	Callback = function()
-        
+        function Chat(message)
+    game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(message , "All")
+end
+
+Rizz_Lines = loadstring(game:HttpGet("https://raw.githubusercontent.com/mikhailramlal/Rizzer/main/auto-update"))()
+
+local lib = loadstring(game:HttpGet("https://raw.githubusercontent.com/mikhailramlal/Rizzer/main/ui"))()
+
+local Rizz_Main = lib:Window("Rizzler Made by: idiot hub")
+
+Rizz_Main:Label("Main")
+
+Rizz_Main:Dropdown("Line Picker", Rizz_Lines, function(line)
+    getgenv().line2 = tostring(line)
+end, true)
+
+
+Rizz_Main:Button("Rizz" , function() 
+    Chat(getgenv().line2)
+end)
   	end    
 })
         
