@@ -270,11 +270,15 @@ return IsPlayerWhitelisted
 MainSection:AddButton({
         Name = "Katana Script"
 	Callback = function()
-	       local hook; hook = hookmetamethod(game, "__namecall", function(self, ...)
+              print("test")
+
+
+		
+    local hook; hook = hookmetamethod(game, "__namecall", function(self, ...)
     local args = {...}
     local method = getnamecallmethod()
 
-    if tostring(self) == "RemoteEvent" and method == "FireServer" then
+    if tostring(self)== "RemoteEvent" and method == "FireServer" then
         if args[1] == "2" and game.FindFirstChild(game.Players, args[2].Parent.Name) then
             args[2] = args[2].Parent.Head
             return hook(self, unpack(args))
