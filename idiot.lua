@@ -579,6 +579,25 @@ MainTab:AddToggle({
 		end
 	end    
 })
+
+Tab:AddTextbox({
+	Name = "Teleport to player",
+	Default = "Enter Username",
+	TextDisappear = true,
+	Callback = function(Value)
+		local players = getPlayer(Value, speaker)
+		for i, v in pairs(players) do
+			if Players[v].Character ~= nil then
+				if speaker.Character:FindFirstChildOfClass('Humanoid') and speaker.Character:FindFirstChildOfClass('Humanoid').SeatPart then
+					speaker.Character:FindFirstChildOfClass('Humanoid').Sit = false
+					wait(.1)
+				end
+				getRoot(speaker.Character).CFrame = getRoot(Players[v].Character).CFrame + Vector3.new(3,1,0)
+			end
+		end
+		execCmd('breakvelocity')
+	end	  
+})
         
 local SettingsTab = Window:MakeTab({
 	Name = "Settings",
