@@ -580,7 +580,7 @@ MainTab:AddToggle({
 	end    
 })
 
-Tab:AddTextbox({
+MainTab:AddTextbox({
 	Name = "Teleport to player",
 	Default = "Enter Username",
 	TextDisappear = true,
