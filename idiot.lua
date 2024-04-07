@@ -580,24 +580,45 @@ MainTab:AddToggle({
 	end    
 })
 
-MainTab:AddTextbox({
-	Name = "Teleport to player",
-	Default = "Enter Username",
-	TextDisappear = true,
-	Callback = function(Value)
-		local players = getPlayer(Value, speaker)
-		for i, v in pairs(players) do
-			if Players[v].Character ~= nil then
-				if speaker.Character:FindFirstChildOfClass('Humanoid') and speaker.Character:FindFirstChildOfClass('Humanoid').SeatPart then
-					speaker.Character:FindFirstChildOfClass('Humanoid').Sit = false
-					wait(.1)
-				end
-				getRoot(speaker.Character).CFrame = getRoot(Players[v].Character).CFrame + Vector3.new(3,1,0)
-			end
-		end
-	end	  
+MainTab:AddButton({
+	Name = "Server Hop",
+	Callback = function()
+        local TeleportService = game:GetService("TeleportService")
+local HttpService = game:GetService("HttpService")
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+
+local function getServerList()
+    local servers = {}
+    local success, result = pcall(function()
+        return HttpService:JSONDecode(game:HttpGet("https://games.roblox.com/v1/games/" .. game.PlaceId .. "/servers/Public?sortOrder=Asc&limit=100"))
+    end)
+    if success then
+        for _, server in pairs(result.data) do
+            if server.playing < server.maxPlayers then
+                table.insert(servers, {id = server.id, players = server.playing})
+            end
+        end
+        table.sort(servers, function(a, b) return a.players < b.players end)
+    end
+    return servers
+end
+
+local function serverHop()
+    local servers = getServerList()
+    if #servers > 0 then
+        -- Attempt to join the server with the smallest number of players
+        TeleportService:TeleportToPlaceInstance(game.PlaceId, servers[1].id, LocalPlayer)
+    else
+        warn("No available servers to hop to.")
+    end
+end
+
+serverHop()
+			
+  	end    
 })
-        
+      
 local SettingsTab = Window:MakeTab({
 	Name = "Settings",
 	Icon = "rbxassetid://4483345998",
