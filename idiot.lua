@@ -544,6 +544,41 @@ for _, playerName in ipairs(getAllPlayers()) do
 			end
   	end    
 })
+
+MainTab:AddToggle({
+	Name = "Walk fling",
+	Default = false,
+	Callback = function(Value)
+		if Value then
+			-- Activate the flinging effect
+			local rs = game:GetService("RunService")
+			local plr = game.Players.LocalPlayer
+			local flinging = true
+
+			if not plr.Character then
+			  return
+			end
+			local rootPart = plr.Character:FindFirstChild("HumanoidRootPart")
+			if not rootPart then
+			  return
+			end
+			local dir = 0.1
+			while flinging and rootPart and rootPart.Parent and rootPart.Parent.Parent do
+				rs.Heartbeat:Wait()
+				local velocity = rootPart.Velocity
+				rootPart.Velocity = ((velocity * 10000) + Vector3.new(0, 10000, 0))
+				rs.RenderStepped:Wait()
+				rootPart.Velocity = velocity
+				rs.RenderStepped:Wait()
+				rootPart.Velocity = velocity + Vector3.new(0, dir, 0)
+				dir *= -1
+			end
+		else
+			-- Deactivate the flinging effect
+			flinging = false
+		end
+	end    
+})
         
 local SettingsTab = Window:MakeTab({
 	Name = "Settings",
