@@ -595,7 +595,6 @@ MainTab:AddTextbox({
 				getRoot(speaker.Character).CFrame = getRoot(Players[v].Character).CFrame + Vector3.new(3,1,0)
 			end
 		end
-		execCmd('breakvelocity')
 	end	  
 })
         
