@@ -309,7 +309,6 @@ MainTab:AddButton({
   	end    
 })
 
-
 MainTab:AddButton({
 	Name = "Rizz script",
 	Callback = function()
