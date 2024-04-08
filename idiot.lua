@@ -627,35 +627,46 @@ serverHop()
 })
 
 MainTab:AddButton({
-	Name = "Rejoin",
+	Name = "shift lock",
 	Callback = function()
-        local TeleportService = game:GetService("TeleportService")
+        local UserInputService = game:GetService("UserInputService")
+local RunService = game:GetService("RunService")
 local Players = game:GetService("Players")
-local LocalPlayer = Players.LocalPlayer
-
-TeleportService:Teleport(game.PlaceId, LocalPlayer)
-            
-  	end    
-})
-
-MainTab:AddButton({
-	Name = "Display Real Time Fps",
-	Callback = function()
-        local RunService = game:GetService("RunService")
-local UserInputService = game:GetService("UserInputService")
-local player = game.Players.LocalPlayer
+local player = Players.LocalPlayer
+local camera = game.Workspace.CurrentCamera
 local gui = Instance.new("ScreenGui", player.PlayerGui)
-local fpsLabel = Instance.new("TextLabel", gui)
+local toggleButton = Instance.new("TextButton", gui)
 
-fpsLabel.Size = UDim2.new(0, 100, 0, 50)
-fpsLabel.Position = UDim2.new(0, 10, 0, 10)
-fpsLabel.TextColor3 = Color3.new(1, 1, 1)
-fpsLabel.BackgroundTransparency = 1
-fpsLabel.TextScaled = true
-fpsLabel.Text = "0 FPS" -- Initial text
-fpsLabel.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1) -- Optional: Background color for visibility
-fpsLabel.BackgroundTransparency = 0.5 -- Optional: Background transparency for visibility
-fpsLabel.BorderSizePixel = 0 -- Optional: Remove border for aesthetics
+-- Configure the button properties
+toggleButton.Size = UDim2.new(0, 100, 0, 50)
+toggleButton.Position = UDim2.new(0, 10, 0, 10)
+toggleButton.Text = "Shift Lock: Off"
+toggleButton.TextColor3 = Color3.new(1, 1, 1)
+toggleButton.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+toggleButton.BackgroundTransparency = 0.5
+toggleButton.BorderSizePixel = 0
+toggleButton.Draggable = true
+
+local shiftLockEnabled = false
+
+-- Function to toggle shift lock
+local function toggleShiftLock()
+    shiftLockEnabled = not shiftLockEnabled
+    toggleButton.Text = shiftLockEnabled and "Shift Lock: On" or "Shift Lock: Off"
+    camera.CameraType = shiftLockEnabled and Enum.CameraType.Scriptable or Enum.CameraType.Custom
+end
+
+-- Connect the toggle function to the button click
+toggleButton.MouseButton1Click:Connect(toggleShiftLock)
+
+-- Update the camera position if shift lock is enabled
+RunService.RenderStepped:Connect(function()
+    if shiftLockEnabled then
+        local character = player.Character or player.CharacterAdded:Wait()
+        local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+        camera.CFrame = CFrame.new(humanoidRootPart.Position + Vector3.new(0, 5, 10), humanoidRootPart.Position)
+    end
+end)
 
 -- Draggable functionality
 local dragging
@@ -663,16 +674,11 @@ local dragInput
 local dragStart
 local startPos
 
-local function update(input)
-    local delta = input.Position - dragStart
-    fpsLabel.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
-end
-
-fpsLabel.InputBegan:Connect(function(input)
+toggleButton.InputBegan:Connect(function(input)
     if input.UserInputType == Enum.UserInputType.MouseButton1 then
         dragging = true
         dragStart = input.Position
-        startPos = fpsLabel.Position
+        startPos = toggleButton.Position
         
         input.Changed:Connect(function()
             if input.UserInputState == Enum.UserInputState.End then
@@ -682,7 +688,7 @@ fpsLabel.InputBegan:Connect(function(input)
     end
 end)
 
-fpsLabel.InputChanged:Connect(function(input)
+toggleButton.InputChanged:Connect(function(input)
     if input.UserInputType == Enum.UserInputType.MouseMovement then
         dragInput = input
     end
@@ -690,29 +696,10 @@ end)
 
 UserInputService.InputChanged:Connect(function(input)
     if input == dragInput and dragging then
-        update(input)
+        local delta = input.Position - dragStart
+        toggleButton.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
     end
-end)
-
--- FPS update functionality
-local function updateFPS()
-    local lastFrame = tick()
-    local thisFrame
-    local deltaTime
-    local fps
-
-    while true do
-        thisFrame = tick()
-        deltaTime = thisFrame - lastFrame
-        lastFrame = thisFrame
-        fps = math.floor(1 / deltaTime)
-        fpsLabel.Text = fps .. " FPS"
-        RunService.RenderStepped:Wait()
-    end
-end
-
-updateFPS()
-			
+end)			
   	end    
 })
       
