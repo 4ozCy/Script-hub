@@ -303,7 +303,7 @@ end)
 })
 
 MainTab:AddButton({
-	Name = "Destroy UI",
+	Name = "Katana Script",
 	Callback = function()
         loadstring(game:HttpGet("https://pastebin.com/raw/Hy9zubkR"))()
   	end    
