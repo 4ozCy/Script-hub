@@ -627,79 +627,13 @@ serverHop()
 })
 
 MainTab:AddButton({
-	Name = "shift lock",
+	Name = "Rejoin",
 	Callback = function()
-        local UserInputService = game:GetService("UserInputService")
-local RunService = game:GetService("RunService")
+        local TeleportService = game:GetService("TeleportService")
 local Players = game:GetService("Players")
-local player = Players.LocalPlayer
-local camera = game.Workspace.CurrentCamera
-local gui = Instance.new("ScreenGui", player.PlayerGui)
-local toggleButton = Instance.new("TextButton", gui)
+local LocalPlayer = Players.LocalPlayer
 
--- Configure the button properties
-toggleButton.Size = UDim2.new(0, 100, 0, 50)
-toggleButton.Position = UDim2.new(0, 10, 0, 10)
-toggleButton.Text = "Shift Lock: Off"
-toggleButton.TextColor3 = Color3.new(1, 1, 1)
-toggleButton.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
-toggleButton.BackgroundTransparency = 0.5
-toggleButton.BorderSizePixel = 0
-toggleButton.Draggable = true
-
-local shiftLockEnabled = false
-
--- Function to toggle shift lock
-local function toggleShiftLock()
-    shiftLockEnabled = not shiftLockEnabled
-    toggleButton.Text = shiftLockEnabled and "Shift Lock: On" or "Shift Lock: Off"
-    camera.CameraType = shiftLockEnabled and Enum.CameraType.Scriptable or Enum.CameraType.Custom
-end
-
--- Connect the toggle function to the button click
-toggleButton.MouseButton1Click:Connect(toggleShiftLock)
-
--- Update the camera position if shift lock is enabled
-RunService.RenderStepped:Connect(function()
-    if shiftLockEnabled then
-        local character = player.Character or player.CharacterAdded:Wait()
-        local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
-        camera.CFrame = CFrame.new(humanoidRootPart.Position + Vector3.new(0, 5, 10), humanoidRootPart.Position)
-    end
-end)
-
--- Draggable functionality
-local dragging
-local dragInput
-local dragStart
-local startPos
-
-toggleButton.InputBegan:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseButton1 then
-        dragging = true
-        dragStart = input.Position
-        startPos = toggleButton.Position
-        
-        input.Changed:Connect(function()
-            if input.UserInputState == Enum.UserInputState.End then
-                dragging = false
-            end
-        end)
-    end
-end)
-
-toggleButton.InputChanged:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseMovement then
-        dragInput = input
-    end
-end)
-
-UserInputService.InputChanged:Connect(function(input)
-    if input == dragInput and dragging then
-        local delta = input.Position - dragStart
-        toggleButton.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
-    end
-end)			
+TeleportService:Teleport(game.PlaceId, LocalPlayer)
   	end    
 })
       
