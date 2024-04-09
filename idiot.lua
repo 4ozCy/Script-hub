@@ -625,17 +625,6 @@ serverHop()
 			
   	end    
 })
-
-MainTab:AddButton({
-	Name = "Rejoin",
-	Callback = function()
-        local TeleportService = game:GetService("TeleportService")
-local Players = game:GetService("Players")
-local LocalPlayer = Players.LocalPlayer
-
-TeleportService:Teleport(game.PlaceId, LocalPlayer)
-  	end    
-})
       
 local SettingsTab = Window:MakeTab({
 	Name = "Settings",
