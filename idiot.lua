@@ -625,6 +625,13 @@ serverHop()
 			
   	end    
 })
+
+MainTab:AddButton({
+	Name = "Shift lock",
+	Callback = function()
+        loadstring(game:HttpGet('https://raw.githubusercontent.com/Unknownproootest/Permanent-Shift-Lock-Alt/alt/PermShiftlockAlt'))()
+  	end    
+})
       
 local SettingsTab = Window:MakeTab({
 	Name = "Settings",
