@@ -642,7 +642,37 @@ local OtherTab = Window:MakeTab({
 OtherTab:AddButton({
 	Name = "Teleport tools",
 	Callback = function()
-			
+	getgenv().speed = 270 -- Change this to control the speed of the tool
+ 
+-- Script
+local Players = game:GetService("Players")
+local TweenService = game:GetService("TweenService")
+ 
+local LocalPlayer = Players.LocalPlayer
+local Character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+local Mouse = LocalPlayer:GetMouse()
+ 
+function tweenTeleport(to, speed)
+    local rootPart = Character.HumanoidRootPart
+    local tween = TweenService:Create(rootPart, TweenInfo.new((to.Position - rootPart.Position).Magnitude / speed, Enum.EasingStyle.Linear), {
+        CFrame = to
+    })
+ 
+    tween:Play()
+    tween.Completed:Wait()
+end
+ 
+-- Teleport Tool
+local tool = Instance.new("Tool")
+tool.RequiresHandle = false
+tool.Name = "Teleport Tool"
+ 
+tool.Activated:connect(function()
+    local position = Mouse.Hit + Vector3.new(0, 2.5, 0)
+    tweenTeleport(CFrame.new(position.X, position.Y, position.Z), getgenv().speed)
+end)
+ 
+tool.Parent = LocalPlayer.Backpack		
   	end    
 })
 
