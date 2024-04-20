@@ -1,19 +1,19 @@
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
 
 OrionLib:MakeNotification({
-	Name = "Welcome to idiot hub",
+	Name = "Welcome to [🤓] Nerd hub",
 	Content = "kdor",
 	Image = "rbxassetid://4483345998",
 	Time = 8
 })
 
 
-local Window = OrionLib:MakeWindow({Name = "idiot hub", HidePremium = false, SaveConfig = false, ConfigFolder = "Orion"})
+local Window = OrionLib:MakeWindow({Name = "[🤓] Nerd hub", HidePremium = false, SaveConfig = false, ConfigFolder = "Orion"})
 
 --Player Tab--
 
 local MainTab = Window:MakeTab({
-	Name = "Main",
+	Name = "[🌟] Main",
 	Icon = "rbxassetid://4483345998",
 	PremiumOnly = false
 })
@@ -634,7 +634,7 @@ MainTab:AddButton({
 })
 
 local OtherTab = Window:MakeTab({
-	Name = "Other",
+	Name = "[⭐] Other",
 	Icon = "rbxassetid://4483345998",
 	PremiumOnly = false
 })
@@ -676,7 +676,7 @@ tool.Parent = LocalPlayer.Backpack
   	end    
 })
 
-SettingsTab:AddButton({
+OtherTab:AddButton({
 	Name = "Blade ball Auto Parry",
 	Callback = function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/1f0yt/community/main/RedCircleBlock"))()
