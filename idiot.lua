@@ -676,6 +676,13 @@ tool.Parent = LocalPlayer.Backpack
   	end    
 })
 
+SettingsTab:AddButton({
+	Name = "Blade ball Auto Parry",
+	Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/1f0yt/community/main/RedCircleBlock"))()
+  	end    
+})
+
 local SettingsTab = Window:MakeTab({
 	Name = "Settings",
 	Icon = "rbxassetid://4483345998",
