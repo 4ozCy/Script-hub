@@ -642,48 +642,6 @@ local OtherTab = Window:MakeTab({
 OtherTab:AddButton({
 	Name = "Teleport tools",
 	Callback = function()
-        -- Script to create a mobile-supported teleport tool in your inventory
-
--- Function to create the teleport tool
-local function createTeleportTool(player)
-    local tool = Instance.new("Tool") -- Create a new tool instance
-    tool.Name = "TeleportTool" -- Name the tool
-    tool.RequiresHandle = false -- No physical handle required
-
-    -- Script for the tool's functionality
-    local script = Instance.new("LocalScript")
-    script.Parent = tool
-    script.Source = [[
-        local player = game.Players.LocalPlayer
-        local userInputService = game:GetService("UserInputService")
-
-        script.Parent.Activated:Connect(function()
-            -- Get the current camera and player's character
-            local camera = workspace.CurrentCamera
-            local character = player.Character or player.CharacterAdded:Wait()
-            local humanoidRootPart = character:FindFirstChild("HumanoidRootPart")
-
-            -- Touch input handling
-            userInputService.TouchTap:Connect(function(touchPositions)
-                if humanoidRootPart then
-                    local touchPosition = touchPositions[1]
-                    local unitRay = camera:ScreenPointToRay(touchPosition.X, touchPosition.Y)
-                    local ray = Ray.new(unitRay.Origin, unitRay.Direction * 1000)
-                    local _, hitPosition = workspace:FindPartOnRay(ray, character)
-
-                    -- Teleport the player to the touch position
-                    humanoidRootPart.CFrame = CFrame.new(hitPosition)
-                end
-            end)
-        end)
-    ]]
-
-    -- Add the tool to the player's inventory
-    tool.Parent = player.Backpack
-end
-
-    createTeleportTool(player) -- Call the function to create the tool
-end)
 			
   	end    
 })
