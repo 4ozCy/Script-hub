@@ -642,7 +642,7 @@ local OtherTab = Window:MakeTab({
 OtherTab:AddButton({
 	Name = "Teleport tools",
 	Callback = function()
-	getgenv().speed = 270 -- Change this to control the speed of the tool
+	getgenv().speed = 333 -- Change this to control the speed of the tool
  
 -- Script
 local Players = game:GetService("Players")
