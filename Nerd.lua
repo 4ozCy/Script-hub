@@ -1,19 +1,19 @@
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
 
 OrionLib:MakeNotification({
-	Name = "Welcome to [🤓] Nerd hub",
+	Name = "Welcome to [🤓🖕] Nerd hub",
 	Content = "kdor",
 	Image = "rbxassetid://4483345998",
 	Time = 8
 })
 
 
-local Window = OrionLib:MakeWindow({Name = "[🤓] Nerd hub", HidePremium = false, SaveConfig = false, ConfigFolder = "Orion"})
+local Window = OrionLib:MakeWindow({Name = "[🤓🖕] Nerd hub", HidePremium = false, SaveConfig = false, ConfigFolder = "Orion"})
 
 --Player Tab--
 
 local MainTab = Window:MakeTab({
-	Name = "[🌟] Main",
+	Name = "[📖] Main",
 	Icon = "rbxassetid://4483345998",
 	PremiumOnly = false
 })
@@ -634,7 +634,7 @@ MainTab:AddButton({
 })
 
 local OtherTab = Window:MakeTab({
-	Name = "[⭐] Other",
+	Name = "[📝] Other",
 	Icon = "rbxassetid://4483345998",
 	PremiumOnly = false
 })
@@ -684,7 +684,7 @@ OtherTab:AddButton({
 })
 
 local SettingsTab = Window:MakeTab({
-	Name = "Settings",
+	Name = "[⚙️] Settings",
 	Icon = "rbxassetid://4483345998",
 	PremiumOnly = false
 })
