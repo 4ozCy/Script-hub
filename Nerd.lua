@@ -2,7 +2,7 @@ local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shl
 
 OrionLib:MakeNotification({
 	Name = "Welcome to [🤓🖕] Nerd hub",
-	Content = "kdor",
+	Content = "You're a Nerd 🤓",
 	Image = "rbxassetid://4483345998",
 	Time = 8
 })
