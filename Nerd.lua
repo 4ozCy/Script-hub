@@ -13,7 +13,7 @@ local Window = OrionLib:MakeWindow({Name = "[🤓🖕] Nerd hub", HidePremium = 
 --Player Tab--
 
 local MainTab = Window:MakeTab({
-	Name = "[📖] Main",
+	Name = "[📚] Main",
 	Icon = "rbxassetid://4483345998",
 	PremiumOnly = false
 })
