@@ -1,14 +1,14 @@
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
 
 OrionLib:MakeNotification({
-	Name = "Welcome to [🤓🖕] Nerd hub",
+	Name = "Welcome to [🤓] Nerd hub",
 	Content = "You're a Nerd 🤓",
 	Image = "rbxassetid://4483345998",
 	Time = 8
 })
 
 
-local Window = OrionLib:MakeWindow({Name = "[🤓🖕] Nerd hub", HidePremium = false, SaveConfig = false, ConfigFolder = "Orion"})
+local Window = OrionLib:MakeWindow({Name = "[🤓] Nerd hub", HidePremium = false, SaveConfig = false, ConfigFolder = "Orion"})
 
 --Player Tab--
 
@@ -677,9 +677,49 @@ tool.Parent = LocalPlayer.Backpack
 })
 
 OtherTab:AddButton({
-	Name = "Blade ball Auto Parry",
+	Name = "Low Gfx",
 	Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/1f0yt/community/main/RedCircleBlock"))()
+        -- Low Graphics Mode Script for Roblox
+-- This script reduces the graphics quality to improve performance on lower-end devices.
+
+local function applyLowGraphicsSettings()
+    -- Set the overall graphics quality to the lowest
+    settings().Rendering.QualityLevel = Enum.QualityLevel.Level01
+
+    -- Iterate through all descendants of the workspace
+    for _, obj in pairs(workspace:GetDescendants()) do
+        -- Reduce the quality of parts and terrain
+        if obj:IsA("BasePart") or obj:IsA("Terrain") then
+            obj.Material = Enum.Material.Plastic
+            obj.Reflectance = 0
+        end
+
+        -- Hide decals and textures
+        if obj:IsA("Decal") or obj:IsA("Texture") then
+            obj.Transparency = 1
+        end
+
+        -- Disable particle effects
+        if obj:IsA("ParticleEmitter") or obj:IsA("Trail") then
+            obj.Enabled = false
+        end
+
+        -- Adjust lighting settings
+        if obj:IsA("Light") then
+            obj.Enabled = false
+        end
+    end
+
+    -- Adjust global lighting settings
+    local lighting = game:GetService("Lighting")
+    lighting.GlobalShadows = false
+    lighting.FogEnd = 100000
+    lighting.Brightness = 1
+end
+
+-- Apply the low graphics settings when the player's character is added
+game.Players.LocalPlayer.CharacterAdded:Connect(applyLowGraphicsSettings)
+			
   	end    
 })
 
