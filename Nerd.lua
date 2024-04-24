@@ -1,14 +1,14 @@
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
 
 OrionLib:MakeNotification({
-	Name = "Welcome to [🤓] Nerd hub",
-	Content = "You're a Nerd 🤓",
+	Name = "Welcome to Nerd hub",
+	Content = "You're a Nerd",
 	Image = "rbxassetid://4483345998",
 	Time = 8
 })
 
 
-local Window = OrionLib:MakeWindow({Name = "[🤓] Nerd hub", HidePremium = false, SaveConfig = false, ConfigFolder = "Orion"})
+local Window = OrionLib:MakeWindow({Name = "Nerd hub", HidePremium = false, SaveConfig = false, ConfigFolder = "Orion"})
 
 --Player Tab--
 
@@ -673,13 +673,6 @@ tool.Activated:connect(function()
 end)
  
 tool.Parent = LocalPlayer.Backpack		
-  	end    
-})
-
-OtherTab:AddButton({
-	Name = "Low Gfx",
-	Callback = function()
-	loadstring(game:HttpGet("https://pastebin.com/raw/6W7PzP6p"))()
   	end    
 })
 
