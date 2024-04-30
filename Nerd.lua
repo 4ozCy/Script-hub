@@ -320,7 +320,7 @@ Rizz_Lines = loadstring(game:HttpGet("https://raw.githubusercontent.com/mikhailr
 
 local lib = loadstring(game:HttpGet("https://raw.githubusercontent.com/mikhailramlal/Rizzer/main/ui"))()
 
-local Rizz_Main = lib:Window("Rizzler Made by: idiot hub")
+local Rizz_Main = lib:Window("Rizzler Made by: Nerd hub")
 
 Rizz_Main:Label("Main")
 
@@ -336,7 +336,7 @@ end)
 })
 
 MainTab:AddButton({
-	Name = "idiot hub aimlock",
+	Name = "Nerd hub aimlock",
 	Callback = function()
         -- Gui to Lua
 -- Version: 3.2
@@ -372,7 +372,7 @@ TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 TextLabel.BackgroundTransparency = 1.000
 TextLabel.Size = UDim2.new(1.00234735, 0, 1.08253634, 0)
 TextLabel.Font = Enum.Font.SourceSansSemibold
-TextLabel.Text = "Idiot Hub | Aimlock"
+TextLabel.Text = "Nerd Hub | Aimlock"
 TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
 TextLabel.TextSize = 16.000
 
@@ -553,7 +553,7 @@ for _, playerName in ipairs(getAllPlayers()) do
 })
 
 MainTab:AddToggle({
-	Name = "Walk fling",
+	Name = "Touch fling",
 	Default = false,
 	Callback = function(Value)
 		if Value then
