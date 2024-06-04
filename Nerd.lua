@@ -270,7 +270,7 @@ local localPlayer = game:GetService("Players").LocalPlayer
 local camera = workspace.CurrentCamera
 local tick = 0
 local tbl = {}
-local max = 100
+local max = 500
 
 local crashPercent = Drawing.new("Text")
 crashPercent.Outline = true
