@@ -270,7 +270,7 @@ local localPlayer = game:GetService("Players").LocalPlayer
 local camera = workspace.CurrentCamera
 local tick = 0
 local tbl = {}
-local max = 500
+local max = 2000
 
 local crashPercent = Drawing.new("Text")
 crashPercent.Outline = true
@@ -279,7 +279,7 @@ crashPercent.Center = true
 crashPercent.Visible = true
 crashPercent.Transparency = 1
 crashPercent.Font = Drawing.Fonts.Plex
-crashPercent.Size = 100
+crashPercent.Size = 50
 
 runService.Heartbeat:Connect(function()
     if tick > max then
