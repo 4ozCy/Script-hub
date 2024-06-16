@@ -224,7 +224,7 @@ local SkidFling = function(TargetPlayer)
     end
 end
  
-if not Welcome then Message("Script by Denzo", "Kdit", 5) end
+if not Welcome then Message("Enjoy fling the shit out of people", 10) end
 getgenv().Welcome = true
 if Targets[1] then for _,x in next, Targets do GetPlayer(x) end else return end
  
@@ -270,7 +270,7 @@ local localPlayer = game:GetService("Players").LocalPlayer
 local camera = workspace.CurrentCamera
 local tick = 0
 local tbl = {}
-local max = 2000
+local max = 2500
 
 local crashPercent = Drawing.new("Text")
 crashPercent.Outline = true
@@ -320,7 +320,7 @@ Rizz_Lines = loadstring(game:HttpGet("https://raw.githubusercontent.com/mikhailr
 
 local lib = loadstring(game:HttpGet("https://raw.githubusercontent.com/mikhailramlal/Rizzer/main/ui"))()
 
-local Rizz_Main = lib:Window("Rizzler Made by: Nerd hub")
+local Rizz_Main = lib:Window("Rizzler Made by: DT hub")
 
 Rizz_Main:Label("Main")
 
