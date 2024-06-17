@@ -338,11 +338,6 @@ end)
 MainTab:AddButton({
 	Name = "DT hub aimlock",
 	Callback = function()
-        -- Gui to Lua
--- Version: 3.2
-
--- Instances:
-
 local ScreenGui = Instance.new("ScreenGui")
 local Frame = Instance.new("Frame")
 local Frame_2 = Instance.new("Frame")
@@ -351,7 +346,6 @@ local TextButton = Instance.new("TextButton")
 local TextButton_2 = Instance.new("TextButton")
 local TextLabel_2 = Instance.new("TextLabel")
 
---Properties:
 
 ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
@@ -410,9 +404,7 @@ TextLabel_2.TextSize = 16.000
 TextLabel_2.TextWrapped = true
 TextLabel_2.TextXAlignment = Enum.TextXAlignment.Left
 
--- Scripts:
-
-local function RPTXOJ_fake_script() -- TextButton.LocalScript 
+local function RPTXOJ_fake_script()
 	local script = Instance.new('LocalScript', TextButton)
 
 	local state = true
@@ -447,7 +439,7 @@ local function RPTXOJ_fake_script() -- TextButton.LocalScript
 	end)
 end
 coroutine.wrap(RPTXOJ_fake_script)()
-local function CIXXD_fake_script() -- TextButton_2.LocalScript 
+local function CIXXD_fake_script()
 	local script = Instance.new('LocalScript', TextButton_2)
 
 	local state = false
@@ -495,7 +487,7 @@ local function CIXXD_fake_script() -- TextButton_2.LocalScript
 	end)
 end
 coroutine.wrap(CIXXD_fake_script)()
-local function QNWNII_fake_script() -- Frame.LocalScript 
+local function QNWNII_fake_script()
 	local script = Instance.new('LocalScript', Frame)
 
 	script.Parent.Active = true
@@ -512,7 +504,6 @@ MainTab:AddButton({
         local RunService = game:GetService("RunService")
 local Players = game:GetService("Players")
 
--- Function to get all players in the game
 local function getAllPlayers()
     local allPlayers = {}
     for _, player in ipairs(Players:GetPlayers()) do
@@ -521,7 +512,7 @@ local function getAllPlayers()
     return allPlayers
 end
 
-local speaker = Players.LocalPlayer -- Assuming 'LocalPlayer' is the speaker
+local speaker = Players.LocalPlayer
 local Tool = speaker.Character:FindFirstChildWhichIsA("Tool")
 local Handle = Tool and Tool:FindFirstChild("Handle")
 
@@ -557,7 +548,6 @@ MainTab:AddToggle({
 	Default = false,
 	Callback = function(Value)
 		if Value then
-			-- Activate the flinging effect
 			local rs = game:GetService("RunService")
 			local plr = game.Players.LocalPlayer
 			local flinging = true
@@ -581,7 +571,6 @@ MainTab:AddToggle({
 				dir *= -1
 			end
 		else
-			-- Deactivate the flinging effect
 			flinging = false
 		end
 	end    
@@ -643,7 +632,6 @@ OtherTab:AddButton({
 	Callback = function()
 	getgenv().speed = 500
  
--- Script
 local Players = game:GetService("Players")
 local TweenService = game:GetService("TweenService")
  
@@ -661,7 +649,6 @@ function tweenTeleport(to, speed)
     tween.Completed:Wait()
 end
  
--- Teleport Tool
 local tool = Instance.new("Tool")
 tool.RequiresHandle = false
 tool.Name = "Teleport Tool"
@@ -675,7 +662,7 @@ tool.Parent = LocalPlayer.Backpack
   	end    
 })
 
-otherTab:AddButton({
+OtherTab:AddButton({
         Name = "anti-fling",
 	Callback = function()
 local Services = setmetatable({}, {__index = function(Self, Index)
@@ -731,7 +718,6 @@ local function PlayerAdded(Player)
    end)
 end
 
--- // Event Listeners \\ --
 for i,v in ipairs(Services.Players:GetPlayers()) do
    if v ~= LocalPlayer then
        PlayerAdded(v)
@@ -773,6 +759,5 @@ SettingsTab:AddButton({
   	end    
 })
 
---Settings End--
 
-OrionLib:Init() --UI Lib End
+OrionLib:Init() 
