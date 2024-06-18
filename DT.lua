@@ -681,6 +681,13 @@ end
 serverHop()
 	end
 })
+
+OtherTab:AddButton({
+	Name = "Rejoin Game",
+	Callback = function()
+        game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, game.JobId)
+	end
+})
 		
 local SettingsTab = Window:MakeTab({
 	Name = "[⚙️] Settings",
