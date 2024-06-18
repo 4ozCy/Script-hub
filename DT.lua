@@ -665,7 +665,7 @@ tool.Parent = LocalPlayer.Backpack
 OtherTab:AddButton({
         Name = "anti-fling",
 	Callback = function()
-
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Zyneeee/Script-hub/main/anti-fling.lua"))()
 	end
 })
 
