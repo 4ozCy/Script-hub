@@ -670,7 +670,7 @@ OtherTab:AddButton({
 })
 
 OtherTab:AddButton({
-        Name = "Invisible Script(made by: depso)"
+        Name = "Invisible Script(made by: depso)",
 	Callback = function()
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/Zyneeee/Script-hub/main/Invis.lua"))()
 	end
