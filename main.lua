@@ -1,14 +1,14 @@
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
 
 OrionLib:MakeNotification({
-	Name = "Welcome to DT hub",
+	Name = "Welcome to Skidd hub",
 	Content = "You're a Nerd",
 	Image = "rbxassetid://4483345998",
-	Time = 8
+	Time = 10
 })
 
 
-local Window = OrionLib:MakeWindow({Name = "DT hub", HidePremium = false, SaveConfig = false, ConfigFolder = "Orion"})
+local Window = OrionLib:MakeWindow({Name = "Skidd hub", HidePremium = false, SaveConfig = false, ConfigFolder = "Orion"})
 
 --Player Tab--
 
@@ -312,31 +312,12 @@ MainTab:AddButton({
 MainTab:AddButton({
 	Name = "Rizz script",
 	Callback = function()
-        function Chat(message)
-    game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(message , "All")
-end
-
-Rizz_Lines = loadstring(game:HttpGet("https://raw.githubusercontent.com/mikhailramlal/Rizzer/main/auto-update"))()
-
-local lib = loadstring(game:HttpGet("https://raw.githubusercontent.com/mikhailramlal/Rizzer/main/ui"))()
-
-local Rizz_Main = lib:Window("Rizzler Made by: DT hub")
-
-Rizz_Main:Label("Main")
-
-Rizz_Main:Dropdown("Line Picker", Rizz_Lines, function(line)
-    getgenv().line2 = tostring(line)
-end, true)
-
-
-Rizz_Main:Button("Rizz" , function() 
-    Chat(getgenv().line2)
-end)
+        loadstring(game:HttpGet("https://shz.al/~Rizz-script", true))()
   	end    
 })
 
 MainTab:AddButton({
-	Name = "DT hub aimlock",
+	Name = "Skidd hub aimlock",
 	Callback = function()
 local ScreenGui = Instance.new("ScreenGui")
 local Frame = Instance.new("Frame")
@@ -366,7 +347,7 @@ TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 TextLabel.BackgroundTransparency = 1.000
 TextLabel.Size = UDim2.new(1.00234735, 0, 1.08253634, 0)
 TextLabel.Font = Enum.Font.SourceSansSemibold
-TextLabel.Text = "DT Hub | Aimlock"
+TextLabel.Text = "Skidd Hub | Aimlock"
 TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
 TextLabel.TextSize = 16.000
 
