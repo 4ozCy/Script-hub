@@ -296,7 +296,7 @@ runService.Heartbeat:Connect(function()
         localPlayer.Character["Building Tools"].SyncAPI.ServerEndpoint:InvokeServer("CreatePart", "Normal", CFrame.new(-3, 50, -70), workspace)
         crashPercent.Position = Vector2.new(camera.ViewportSize.X / 2, camera.ViewportSize.Y / 2)
         tick += 1
-        crashPercent.Text = "Crash Ban " .. math.floor(tick / max * 100) .. "%"
+        crashPercent.Text = "wait for it to load 100%:" .. math.floor(tick / max * 100) .. "%"
     end
 end)
   	end    
@@ -576,13 +576,6 @@ MainTab:AddToggle({
 	end    
 })
 
-MainTab:AddButton({
-	Name = "Shift lock",
-	Callback = function()
-        loadstring(game:HttpGet('https://raw.githubusercontent.com/Unknownproootest/Permanent-Shift-Lock-Alt/alt/PermShiftlockAlt'))()
-  	end    
-})
-
 local OtherTab = Window:MakeTab({
 	Name = "[📝] Other",
 	Icon = "rbxassetid://4483345998",
@@ -685,7 +678,14 @@ serverHop()
 OtherTab:AddButton({
 	Name = "Rejoin Game",
 	Callback = function()
-        game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, game.JobId)
+game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, game.JobId)
+	end
+})
+
+OtherTab:AddButton({
+	Name = "shift lock",
+	Callback = function()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/Unknownproootest/Permanent-Shift-Lock-Alt/alt/PermShiftlockAlt'))()
 	end
 })
 		
