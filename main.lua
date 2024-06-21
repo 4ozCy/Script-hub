@@ -303,17 +303,10 @@ end)
 })
 
 MainTab:AddButton({
-	Name = "Katana Script",
+	Name = "shift lock",
 	Callback = function()
-        loadstring(game:HttpGet("https://pastebin.com/raw/Hy9zubkR"))()
-  	end    
-})
-
-MainTab:AddButton({
-	Name = "Rizz script",
-	Callback = function()
-        loadstring(game:HttpGet("https://shz.al/~Rizz-script", true))()
-  	end    
+	loadstring(game:HttpGet('https://raw.githubusercontent.com/Unknownproootest/Permanent-Shift-Lock-Alt/alt/PermShiftlockAlt'))()
+	end
 })
 
 MainTab:AddButton({
@@ -689,13 +682,6 @@ OtherTab:AddButton({
 	Name = "Rejoin Game",
 	Callback = function()
 game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, game.JobId)
-	end
-})
-
-OtherTab:AddButton({
-	Name = "shift lock",
-	Callback = function()
-loadstring(game:HttpGet('https://raw.githubusercontent.com/Unknownproootest/Permanent-Shift-Lock-Alt/alt/PermShiftlockAlt'))()
 	end
 })
 
