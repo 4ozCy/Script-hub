@@ -724,9 +724,9 @@ local MiscTab = Window:MakeTab({
 })
 
 MiscTab:AddButton({
-        Name = "low gfx",
-        Callback = function()
-	local Terrain = workspace:FindFirstChildOfClass('Terrain')
+       Name = "low gfx",
+       Callback = function()
+       local Terrain = workspace:FindFirstChildOfClass('Terrain')
 	Terrain.WaterWaveSize = 0
 	Terrain.WaterWaveSpeed = 0
 	Terrain.WaterReflectance = 0
@@ -767,13 +767,13 @@ MiscTab:AddButton({
 		end)
 	end)
 end)
-        end
+       end
 })
 
 MiscTab:AddButton({
-        Name = "fixcam",
-        Callback = function()
-        workspace.CurrentCamera:remove()
+       Name = "fixcam",
+       Callback = function()
+       workspace.CurrentCamera:remove()
 	wait(.1)
 	repeat wait() until speaker.Character ~= nil
 	workspace.CurrentCamera.CameraSubject = speaker.Character:FindFirstChildWhichIsA('Humanoid')
@@ -783,7 +783,7 @@ MiscTab:AddButton({
 	speaker.CameraMode = "Classic"
 	speaker.Character.Head.Anchored = false
 end)
-        end
+       end
 })
 		
 local SettingsTab = Window:MakeTab({
