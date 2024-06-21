@@ -784,7 +784,7 @@ MiscTab:AddButton({
 	speaker.Character.Head.Anchored = false
 end)
         end
-)}
+})
 		
 local SettingsTab = Window:MakeTab({
 	Name = "[⚙️] Settings",
