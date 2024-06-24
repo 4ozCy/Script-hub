@@ -780,6 +780,13 @@ MiscTab:AddButton({
        loadstring(game:HttpGet(('https://raw.githubusercontent.com/cool83birdcarfly02six/UNIVERSALESPLTX/main/README.md'),true))()
        end
 })
+
+MiscTab:AddButton({
+       Name = "anti-afk",
+       Callback = function()
+       loadstring(game:HttpGet("https://raw.githubusercontent.com/Zyneeee/Script-hub/main/Anti-afk.lua"))()
+       end
+})
 		
 local SettingsTab = Window:MakeTab({
 	Name = "[⚙️] Settings",
