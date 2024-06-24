@@ -3,7 +3,7 @@ local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shl
 OrionLib:MakeNotification({
 	Name = "Welcome to Skidd hub",
 	Content = "You're a Nerd",
-	Image = "rbxassetid://18186766263",
+	Image = "rbxassetid://18186948969",
 	Time = 10
 })
 
@@ -14,7 +14,7 @@ local Window = OrionLib:MakeWindow({Name = "Skidd hub", HidePremium = false, Sav
 
 local MainTab = Window:MakeTab({
 	Name = "[📚] Main",
-	Icon = "rbxassetid://18186766263",
+	Icon = "rbxassetid://18186948969",
 	PremiumOnly = false
 })
 
@@ -552,7 +552,7 @@ MainTab:AddToggle({
 
 local OtherTab = Window:MakeTab({
 	Name = "[📝] Other",
-	Icon = "rbxassetid://18186766263",
+	Icon = "rbxassetid://18186948969",
 	PremiumOnly = false
 })
 
@@ -687,7 +687,7 @@ game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, game.Jo
 
 local MiscTab = Window:MakeTab({
         Name = "[🔮] Misc",
-        Icon = "rbxassetid://18186766263",
+        Icon = "rbxassetid://18186948969",
         PremiumOnly = false
 })
 
@@ -776,7 +776,7 @@ MiscTab:AddButton({
 		
 local SettingsTab = Window:MakeTab({
 	Name = "[⚙️] Settings",
-	Icon = "rbxassetid://18186766263",
+	Icon = "rbxassetid://18186948969",
 	PremiumOnly = false
 })
 
