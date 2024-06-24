@@ -776,7 +776,7 @@ MiscTab:AddButton({
 
 MiscTab:AddButton({
        Name = "esp",
-       Callback function()
+       Callback = function()
        loadstring(game:HttGet("https://raw.githubusercontent.com/Zyneeee/Script-hub/main/esp.lua"))()
        end
 })
