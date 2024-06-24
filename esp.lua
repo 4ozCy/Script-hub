@@ -253,7 +253,7 @@ TextLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
 TextLabel.BorderSizePixel = 0
 TextLabel.Position = UDim2.new(0.112385318, 0, 0.0263157897, 0)
 TextLabel.Size = UDim2.new(0, 119, 0, 33)
-TextLabel.Image = "http://www.roblox.com/asset/?id="
+TextLabel.Image = "http://www.roblox.com/asset/?id=18186948969"
 
 ESPS.Name = "ESPS"
 ESPS.Parent = ESPFRAME
