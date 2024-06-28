@@ -795,7 +795,7 @@ MiscTab:AddButton({
        end
 })
 
-local BfTab = Window:MakeTab({
+local bfTab = Window:MakeTab({
 	Name = "[🍇] Blox Fruit",
 	Icon = "rbxassetid://18186948969",
 	Premium0nly = false
