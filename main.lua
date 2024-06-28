@@ -795,6 +795,32 @@ MiscTab:AddButton({
        end
 })
 
+local BfTab = Window:MakeTab({
+	Name = "[🍇] Blox Fruit",
+	Icon = "rbxassetid://18186948969",
+	Premium0nly = false
+})
+
+bfTab:AddButton({
+        Name = "W-Azure Hub (free version)",
+        Callback = function()
+        getgenv().Team = "Pirates"
+getgenv().AutoLoad = false --Will Load Script On Server Hop
+getgenv().SlowLoadUi  = false
+getgenv().ForceUseSilentAimDashModifier = false --Force turn on silent aim , if error then executor problem
+getgenv().ForceUseWalkSpeedModifier = false --Force turn on Walk Speed Modifier , if error then executor problem
+
+ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/3b2169cf53bc6104dabe8e19562e5cc2.lua"))()
+	end
+})
+
+bfTab:AddButton({
+	Name = "Redz Hub",
+	Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/REDzHUB/BloxFruits/main/redz9999"))()
+	end
+})
+
 local SettingsTab = Window:MakeTab({
 	Name = "[⚙️] Settings",
 	Icon = "rbxassetid://18186948969",
