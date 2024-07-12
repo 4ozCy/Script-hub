@@ -692,6 +692,13 @@ local MiscTab = Window:MakeTab({
 })
 
 MiscTab:AddButton({
+       Name = "wynerd hub",
+       Callback = function()
+       loadstring(game:HttpGet("https://raw.githubusercontent.com/Imalwibest/Imalwibest/main/wynerdV2.lua",true))()
+       end
+})
+
+MiscTab:AddButton({
        Name = "anti-lag",
        Callback = function()
        local ToDisable = {
