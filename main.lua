@@ -687,7 +687,7 @@ game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, game.Jo
 
 local tsbTab = Window:MakeTab({
 	Name = "[💪] The Strongest Battleground",
-	icon = "rbxassetid://18186948969",
+	Icon = "rbxassetid://18186948969",
 	Premium0nly = false
 })
 
