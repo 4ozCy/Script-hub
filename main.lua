@@ -686,20 +686,20 @@ game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, game.Jo
 })
 
 local tsbTab = Window:MakeTab({
-	Name = "[💪] The Strongest Battleground",
+	Name = "[💪] Battleground",
 	Icon = "rbxassetid://18186948969",
 	Premium0nly = false
 })
 
 tsbTab:AddButton({
-       Name = "Death Counter Esp",
+       Name = "Death Counter Esp (tsb only)",
        Callback = function()
        loadstring(game:HttpGet("https://raw.githubusercontent.com/louismich4el/ItsLouisPlayz-Scripts/main/TSB%20Death%20Counter%20Identifier.lua"))()
        end
 })
 
 tsbTab:AddButton({
-       Name = "anti lag (tsb only)",
+       Name = "anti-lag (tsb only)",
        Callback = function()
        loadstring(game:HttpGet("https://raw.githubusercontent.com/louismich4el/ItsLouisPlayz-Scripts/main/TSB%20Anti%20Lag.lua"))()
        end
