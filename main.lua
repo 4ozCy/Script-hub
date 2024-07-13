@@ -685,6 +685,19 @@ game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, game.Jo
 	end
 })
 
+local tsbTab = Window:MakeTab({
+	Name = "[💪] The Strongest Battleground",
+	icon = "rbxassetid://18186948969",
+	Premium0nly = false
+})
+
+tsbTab:AddButton({
+       Name = "Death Counter Esp",
+       Callback = function()
+       loadstring(game:HttpGet("https://raw.githubusercontent.com/louismich4el/ItsLouisPlayz-Scripts/main/TSB%20Death%20Counter%20Identifier.lua"))()
+       end
+})
+
 local MiscTab = Window:MakeTab({
         Name = "[🔮] Misc",
         Icon = "rbxassetid://18186948969",
