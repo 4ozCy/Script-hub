@@ -698,6 +698,13 @@ tsbTab:AddButton({
        end
 })
 
+tsbTab:AddButton({
+       Name = "anti lag (tsb only)",
+       Callback = function()
+       loadstring(game:HttpGet("https://raw.githubusercontent.com/louismich4el/ItsLouisPlayz-Scripts/main/TSB%20Anti%20Lag.lua"))()
+       end
+})
+
 local MiscTab = Window:MakeTab({
         Name = "[🔮] Misc",
         Icon = "rbxassetid://18186948969",
