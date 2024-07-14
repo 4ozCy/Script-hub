@@ -738,6 +738,13 @@ MiscTab:AddButton({
 })
 
 MiscTab:AddButton({
+	Name = "tools giver",
+	Callback = function()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/yofriendfromschool1/Sky-Hub-Backup/main/gametoolgiver.lua"))()
+	end
+})
+
+MiscTab:AddButton({
        Name = "anti-lag",
        Callback = function()
        local ToDisable = {
