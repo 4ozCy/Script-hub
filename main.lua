@@ -691,6 +691,18 @@ OtherTab:AddButton({
 	loadstring(game:HttpGet(('https://pastebin.com/raw/iThJgCAS'),true))()
 	end
 })
+local adminTab = Window:MakeTab({
+	Name = "[⚒️] Admin Hub",
+	Icon = "rbxassetid://18186948969",
+	Premium0nly = false
+})
+
+adminTab:AddButton({
+	Name = "Proton Hub",
+	Callback = function()
+	loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/5e6e6cc1bb32fd926764d064e2c60a3b.lua"))()
+	end
+})
 
 local tsbTab = Window:MakeTab({
 	Name = "[💪] Battleground",
