@@ -693,6 +693,13 @@ game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, game.Jo
 })
 
 OtherTab:AddButton({
+	Name = "fe Parkour",
+	Callback = function()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/Zyneeee/Script-hub/main/Parkour.lua"))()
+	end
+})
+
+OtherTab:AddButton({
 	Name = "fe bring people",
 	Callback = function()
 	loadstring(game:HttpGet(('https://pastebin.com/raw/iThJgCAS'),true))()
