@@ -693,13 +693,6 @@ game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, game.Jo
 })
 
 OtherTab:AddButton({
-	Name = "fe Parkour",
-	Callback = function()
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/Zyneeee/Script-hub/main/Parkour.lua"))()
-	end
-})
-
-OtherTab:AddButton({
 	Name = "fe bring people",
 	Callback = function()
 	loadstring(game:HttpGet(('https://pastebin.com/raw/iThJgCAS'),true))()
@@ -715,6 +708,13 @@ adminTab:AddButton({
 	Name = "Proton Hub",
 	Callback = function()
 	loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/5e6e6cc1bb32fd926764d064e2c60a3b.lua"))()
+	end
+})
+
+adminTab:AddButton({
+	Name = "Equinox hub",
+	Callback = function()
+	loadstring(game:HttGet("https://raw.githubusercontent.com/Zyneeee/Script-hub/main/Equinox-hub.lua"))()
 	end
 })
 
