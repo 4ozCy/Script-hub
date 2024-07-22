@@ -759,9 +759,13 @@ MiscTab:AddButton({
 })
 
 MiscTab:AddButton({
-       Name = "Fps Booster",
+       Name = "low gfx",
        Callback = function()
-       loadstring(game:HttpGet("https://raw.githubusercontent.com/Zyneeee/Script-hub/main/fps.lua"))()
+       for i,v in next, (workspace:GetDescendants()) do
+ if v:IsA("Part") then v.Material = Enum.Material.SmoothPlastic
+ end
+ end
+        end
 })
 	
 MiscTab:AddButton({
