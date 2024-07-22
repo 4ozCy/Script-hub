@@ -21,4 +21,4 @@ _G.Settings = {
     ["Low Rendering"] = true, -- Lower Rendering
     ["Low Quality Parts"] = true -- Lower quality parts
 }
-loadstring(game:HttpGet("https://raw.githubusercontent.com/CasperFlyModz/discord.gg-rips/main/FPSBooster.lua"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Zyneeee/Script-hub/main/fps-booster.lua"))()
