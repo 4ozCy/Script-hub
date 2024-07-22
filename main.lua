@@ -862,6 +862,19 @@ MiscTab:AddButton({
        end
 })
 
+local ParkourTab = Window:MakeTab({
+	Name = "[🤸] Parkour",
+	Icon = "rbxassetid://18186948969",
+	Premium0nly = false
+})
+
+ParkourTab:AddButton({
+	Name = "infinite exp",
+	Callback = function()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/charlesqwc/ParkourLegacyOPPoints/main/Points"))()
+	end
+})
+
 local bfTab = Window:MakeTab({
 	Name = "[🍇] Blox Fruit",
 	Icon = "rbxassetid://18186948969",
