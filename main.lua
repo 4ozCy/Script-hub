@@ -1,4 +1,4 @@
-local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/thanhdat4461/OrionMoblie/main/source')))()
 
 OrionLib:MakeNotification({
 	Name = "Welcome to Skidd hub",
@@ -10,7 +10,6 @@ OrionLib:MakeNotification({
 
 local Window = OrionLib:MakeWindow({Name = "Skidd hub", HidePremium = false, SaveConfig = false, ConfigFolder = "Orion"})
 
---Player Tab--
 
 local MainTab = Window:MakeTab({
 	Name = "[📚] Main",
