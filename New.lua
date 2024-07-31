@@ -14,3 +14,4 @@ local teleportPosition2 = CFrame.new(239.7410, 443.8971, -110.4596)
 humanoidRootPart.CFrame = teleportPosition1
 wait(3.2)
 humanoidRootPart.CFrame = teleportPosition2
+end)
