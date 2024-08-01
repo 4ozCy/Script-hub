@@ -16,3 +16,23 @@ wait(3.2)
 humanoidRootPart.CFrame = teleportPosition2
     
 end)
+
+local otherWindow = Library:NewWindow("Skidd hub")
+
+local other = mainWindow:NewSection("other")
+
+other:CreateTextbox("Username", function(text)
+    local targetUsername = text
+end)
+
+other:CreateButton("teleport", function()
+    local player = game.Players.LocalPlayer
+    local humanoidRootPart = player.Character.HumanoidRootPart
+
+    local targetPlayer = game.Players:FindFirstChild(targetUsername)
+    
+    if targetPlayer and targetPlayer.Character then
+        local targetHumanoidRootPart = targetPlayer.Character.HumanoidRootPart
+        humanoidRootPart.CFrame = targetHumanoidRootPart.CFrame
+    end
+end)
