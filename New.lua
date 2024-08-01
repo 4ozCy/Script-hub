@@ -12,7 +12,7 @@ local teleportPosition1 = CFrame.new(287.6754, 439.5106, 480.3295)
 local teleportPosition2 = CFrame.new(-22.259986877441406, 472.40972900390625, 113.41948699951172)
 
 humanoidRootPart.CFrame = teleportPosition1
-wait(3)
+wait(2.7)
 humanoidRootPart.CFrame = teleportPosition2
     
 end)
@@ -52,7 +52,7 @@ main:CreateButton("teleport", function()
             
             local speakerRoot = getRoot(speaker.Character)
             local targetRoot = getRoot(game.Players[v].Character)
-            speakerRoot.CFrame = targetRoot.CFrame + Vector3.new(1, 1, 0)
+            speakerRoot.CFrame = targetRoot.CFrame + Vector3.new(0, 0, 0)
         end
     end
 end)
