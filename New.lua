@@ -24,6 +24,20 @@ main:CreateTextbox("Username", function(text)
 end)
 
 main:CreateButton("teleport", function()
+    local function getPlayer(username, speaker)
+        local foundPlayers = {}
+        for _, player in pairs(game.Players:GetPlayers()) do
+            if player.Name:lower():sub(1, #username) == username:lower() then
+                table.insert(foundPlayers, player.Name)
+            end
+        end
+        return foundPlayers
+    end
+
+    local function getRoot(character)
+        return character:FindFirstChild("HumanoidRootPart") or character:FindFirstChild("Torso") or character:FindFirstChild("UpperTorso")
+    end
+
     local players = getPlayer(targetUsername, game.Players.LocalPlayer)
     
     for i, v in pairs(players) do
