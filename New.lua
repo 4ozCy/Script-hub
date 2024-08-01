@@ -2,7 +2,7 @@ local Library = loadstring(Game:HttpGet("https://raw.githubusercontent.com/blood
 
 local mainWindow = Library:NewWindow("Skidd hub")
 
-local main = mainWindow:NewSection("Main")
+local main = mainWindow:NewSection("Map")
 
 main:CreateButton("teleport", function()
 local player = game.Players.LocalPlayer
@@ -17,15 +17,13 @@ humanoidRootPart.CFrame = teleportPosition2
     
 end)
 
-local otherWindow = Library:NewWindow("Skidd hub")
+local main = mainWindow:NewSection("Player")
 
-local other = mainWindow:NewSection("other")
-
-other:CreateTextbox("Username", function(text)
+main:CreateTextbox("Username", function(text)
     local targetUsername = text
 end)
 
-other:CreateButton("teleport", function()
+main:CreateButton("teleport", function()
     local player = game.Players.LocalPlayer
     local humanoidRootPart = player.Character.HumanoidRootPart
 
