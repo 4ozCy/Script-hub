@@ -52,7 +52,7 @@ main:CreateButton("teleport", function()
             
             local speakerRoot = getRoot(speaker.Character)
             local targetRoot = getRoot(game.Players[v].Character)
-            speakerRoot.CFrame = targetRoot.CFrame + Vector3.new(3, 1, 0)
+            speakerRoot.CFrame = targetRoot.CFrame + Vector3.new(1, 1, 0)
         end
     end
 end)
