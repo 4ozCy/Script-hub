@@ -94,47 +94,33 @@ other:CreateButton("view", function()
     end
 end)
 
-other:CreateTextbox("Username", function(text)
-    targetUsername = text
-end)
+Other:CreateTextbox("Username", function(text)
+    local targetUsername = text
 
-other:CreateButton("Aim Assist", function()
-    local aimAssistRange = 100000
-
-    local function getPlayer(username)
+    local function getPlayer(username, speaker)
+        local foundPlayers = {}
         for _, player in pairs(game.Players:GetPlayers()) do
-            if player.Name:lower() == username:lower() then
-                return player
+            if player.Name:lower():sub(1, #username) == username:lower() then
+                table.insert(foundPlayers, player)
             end
         end
-        return nil
+        return foundPlayers
     end
 
-    local function getTorso(character)
-        return character:FindFirstChild("HumanoidRootPart") or character:FindFirstChild("UpperTorso") or character:FindFirstChild("Torso")
-    end
-
-    local function aimAssist()
-        local targetPlayer = getPlayer(targetUsername)
-        if not targetPlayer or not targetPlayer.Character then
-            return
-        end
-
-        local torso = getTorso(targetPlayer.Character)
-        if not torso then
-            return
-        end
-
-        local camera = workspace.CurrentCamera
-        local targetPosition = torso.Position
-        local cameraPosition = camera.CFrame.Position
-        local direction = (targetPosition - cameraPosition).unit
-        local distance = (targetPosition - cameraPosition).magnitude
-
-        if distance <= aimAssistRange then
-            camera.CFrame = CFrame.new(cameraPosition, targetPosition)
+    local function Locate(player)
+        if player and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+            local position = player.Character.HumanoidRootPart.Position
+            print(player.Name .. " is located at: " .. tostring(position))
         end
     end
 
-    aimAssist()
+    Other:CreateToggle("Locate", function(value)
+        if value then
+            local speaker = game.Players.LocalPlayer
+            local players = getPlayer(targetUsername, speaker)
+            for _, player in pairs(players) do
+                Locate(player)
+            end
+        end
+    end)
 end)
