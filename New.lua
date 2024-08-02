@@ -56,3 +56,36 @@ main:CreateButton("teleport", function()
         end
     end
 end)
+
+main:CreateTextbox("Username", function(text)
+    targetUsername = text
+end)
+
+main:CreateButton("view", function()
+    local function getPlayer(username, speaker)
+        local foundPlayers = {}
+        for _, player in pairs(game.Players:GetPlayers()) do
+            if player.Name:lower():sub(1, #username) == username:lower() then
+                table.insert(foundPlayers, player.Name)
+            end
+        end
+        return foundPlayers
+    end
+
+    local function getRoot(character)
+        return character:FindFirstChild("HumanoidRootPart") or character:FindFirstChild("Torso") or character:FindFirstChild("UpperTorso")
+    end
+
+    local players = getPlayer(targetUsername, game.Players.LocalPlayer)
+    
+    for i, v in pairs(players) do
+        if game.Players[v] and game.Players[v].Character then
+            local speaker = game.Players.LocalPlayer
+            local targetRoot = getRoot(game.Players[v].Character)
+            if targetRoot then
+                workspace.CurrentCamera.CameraSubject = targetRoot
+                workspace.CurrentCamera.CFrame = CFrame.new(targetRoot.Position + Vector3.new(0, 5, 10), targetRoot.Position)
+            end
+        end
+    end
+end)
