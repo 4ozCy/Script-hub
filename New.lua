@@ -96,38 +96,42 @@ main:CreateTextbox("Username", function(text)
     targetUsername = text
 end)
 
-main:CreateButton("Locate Player", function()
-    local function createESP(player)
-        if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
-            local espPart = Instance.new("Part")
-            espPart.Name = "ESP"
-            espPart.Size = Vector3.new(5, 5, 1)
-            espPart.Anchored = true
-            espPart.CanCollide = false
-            espPart.BrickColor = BrickColor.new("Bright red")
-            espPart.Material = Enum.Material.Neon
-            espPart.Transparency = 0.5
-            espPart.Parent = workspace
-            espPart.CFrame = player.Character.HumanoidRootPart.CFrame * CFrame.new(0, 5, 0)
+main:CreateButton("Aim Assist", function()
+    local function getPlayer(username)
+        for _, player in pairs(game.Players:GetPlayers()) do
+            if player.Name:lower() == username:lower() then
+                return player
+            end
+        end
+        return nil
+    end
 
-            local billboardGui = Instance.new("BillboardGui")
-            billboardGui.Parent = espPart
-            billboardGui.Adornee = espPart
-            billboardGui.Size = UDim2.new(0, 200, 0, 50)
-            billboardGui.StudsOffset = Vector3.new(0, 3, 0)
+    local function getTorso(character)
+        return character:FindFirstChild("HumanoidRootPart") or character:FindFirstChild("UpperTorso") or character:FindFirstChild("Torso")
+    end
 
-            local textLabel = Instance.new("TextLabel")
-            textLabel.Parent = billboardGui
-            textLabel.Text = player.Name
-            textLabel.TextColor3 = Color3.new(1, 1, 1)
-            textLabel.BackgroundTransparency = 1
-            textLabel.TextStrokeTransparency = 0.5
+    local function aimAssist()
+        local targetPlayer = getPlayer(targetUsername)
+        if not targetPlayer or not targetPlayer.Character then
+            return
+        end
+
+        local torso = getTorso(targetPlayer.Character)
+        if not torso then
+            return
+        end
+
+        local camera = workspace.CurrentCamera
+        local targetPosition = torso.Position
+        local cameraPosition = camera.CFrame.Position
+        local direction = (targetPosition - cameraPosition).unit
+        local distance = (targetPosition - cameraPosition).magnitude
+
+        if distance <= aimAssistRange then
+            camera.CFrame = CFrame.new(cameraPosition, targetPosition)
         end
     end
 
-    for _, player in pairs(game.Players:GetPlayers()) do
-        if player.Name:lower() == targetUsername:lower() then
-            createESP(player)
-        end
-    end
+    local aimAssistRange = 1000000
+    aimAssist()
 end)
