@@ -1,6 +1,6 @@
 local Library = loadstring(Game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/wizard"))()
 
-local mainWindow = Library:NewWindow("Skidd hub")
+local mainWindow = Library:NewWindow("nozcyy's hub")
 
 local main = mainWindow:NewSection("Map")
 
@@ -57,6 +57,8 @@ main:CreateButton("teleport", function()
     end
 end)
 
+local main = mainWindow:NewSection("Misc")
+
 main:CreateTextbox("Username", function(text)
     targetUsername = text
 end)
@@ -86,6 +88,46 @@ main:CreateButton("view", function()
                 workspace.CurrentCamera.CameraSubject = targetRoot
                 workspace.CurrentCamera.CFrame = CFrame.new(targetRoot.Position + Vector3.new(0, 5, 10), targetRoot.Position)
             end
+        end
+    end
+end)
+
+main:CreateTextbox("Username", function(text)
+    targetUsername = text
+end)
+
+main:CreateButton("Locate Player", function()
+    local function createESP(player)
+        if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+            local espPart = Instance.new("Part")
+            espPart.Name = "ESP"
+            espPart.Size = Vector3.new(5, 5, 1)
+            espPart.Anchored = true
+            espPart.CanCollide = false
+            espPart.BrickColor = BrickColor.new("Bright red")
+            espPart.Material = Enum.Material.Neon
+            espPart.Transparency = 0.5
+            espPart.Parent = workspace
+            espPart.CFrame = player.Character.HumanoidRootPart.CFrame * CFrame.new(0, 5, 0)
+
+            local billboardGui = Instance.new("BillboardGui")
+            billboardGui.Parent = espPart
+            billboardGui.Adornee = espPart
+            billboardGui.Size = UDim2.new(0, 200, 0, 50)
+            billboardGui.StudsOffset = Vector3.new(0, 3, 0)
+
+            local textLabel = Instance.new("TextLabel")
+            textLabel.Parent = billboardGui
+            textLabel.Text = player.Name
+            textLabel.TextColor3 = Color3.new(1, 1, 1)
+            textLabel.BackgroundTransparency = 1
+            textLabel.TextStrokeTransparency = 0.5
+        end
+    end
+
+    for _, player in pairs(game.Players:GetPlayers()) do
+        if player.Name:lower() == targetUsername:lower() then
+            createESP(player)
         end
     end
 end)
