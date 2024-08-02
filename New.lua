@@ -57,13 +57,15 @@ main:CreateButton("teleport", function()
     end
 end)
 
-local main = mainWindow:NewSection("Misc")
+local otherWindow = Library:NewWindow("nozcyy's hub")
 
-main:CreateTextbox("Username", function(text)
+local other = otherWindow:NewSection("Misc")
+
+other:CreateTextbox("Username", function(text)
     targetUsername = text
 end)
 
-main:CreateButton("view", function()
+other:CreateButton("view", function()
     local function getPlayer(username, speaker)
         local foundPlayers = {}
         for _, player in pairs(game.Players:GetPlayers()) do
@@ -92,11 +94,13 @@ main:CreateButton("view", function()
     end
 end)
 
-main:CreateTextbox("Username", function(text)
+other:CreateTextbox("Username", function(text)
     targetUsername = text
 end)
 
-main:CreateButton("Aim Assist", function()
+other:CreateButton("Aim Assist", function()
+    local aimAssistRange = 100000
+
     local function getPlayer(username)
         for _, player in pairs(game.Players:GetPlayers()) do
             if player.Name:lower() == username:lower() then
@@ -132,6 +136,5 @@ main:CreateButton("Aim Assist", function()
         end
     end
 
-    local aimAssistRange = 1000000
     aimAssist()
 end)
