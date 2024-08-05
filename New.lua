@@ -64,38 +64,6 @@ local Other = OtherWindow:NewSection("Misc")
 Other:CreateTextbox("Username", function(text)
     local targetUsername = text
 
-Other:CreateToggle("View Player", function(value)
-    if value then
-        local function getPlayer(username)
-            for _, player in pairs(game.Players:GetPlayers()) do
-                if player.Name:lower() == username:lower() then
-                    return player
-                end
-            end
-            return nil
-        end
-
-        local function viewPlayer(player)
-            if player and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
-                local camera = workspace.CurrentCamera
-                camera.CameraSubject = player.Character.HumanoidRootPart
-                camera.CameraType = Enum.CameraType.Scriptable
-            end
-        end
-
-        local targetPlayer = getPlayer(targetUsername)
-        if targetPlayer then
-            viewPlayer(targetPlayer)
-        else
-            print("Player not found.")
-        end
-    else
-        local camera = workspace.CurrentCamera
-        camera.CameraSubject = game.Players.LocalPlayer.Character.HumanoidRootPart
-        camera.CameraType = Enum.CameraType.Custom
-    end
-end)
-
 Other:CreateButton("Get My Position", function()
     local player = game.Players.LocalPlayer
     if player and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
