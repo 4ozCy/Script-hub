@@ -65,44 +65,41 @@ Other:CreateTextbox("Username", function(text)
 end)
 
 Other:CreateToggle("View Player", function(value)
-        if value then
-            local function getPlayer(username, speaker)
-                local foundPlayers = {}
-                for _, player in pairs(game.Players:GetPlayers()) do
-                    if player.Name:lower():sub(1, #username) == username:lower() then
-                        table.insert(foundPlayers, player.Name)
-                    end
-                end
-                return foundPlayers
-            end
-
-            local function getRoot(character)
-                return character:FindFirstChild("HumanoidRootPart") or character:FindFirstChild("Torso") or character:FindFirstChild("UpperTorso")
-            end
-
-            local players = getPlayer(text, game.Players.LocalPlayer)
-
-            for _, v in pairs(players) do
-                if game.Players[v] and game.Players[v].Character then
-                    local speaker = game.Players.LocalPlayer
-                    local targetRoot = getRoot(game.Players[v].Character)
-                    if targetRoot then
-                        workspace.CurrentCamera.CameraSubject = targetRoot
-                        workspace.CurrentCamera.CFrame = CFrame.new(targetRoot.Position + Vector3.new(0, 5, 10), targetRoot.Position)
-                    end
+    if value then
+        local function getPlayer(username, speaker)
+            local foundPlayers = {}
+            for _, player in pairs(game.Players:GetPlayers()) do
+                if player.Name:lower():sub(1, #username) == username:lower() then
+                    table.insert(foundPlayers, player.Name)
                 end
             end
-        else
-            local localPlayer = game.Players.LocalPlayer
-            local localRoot = getRoot(localPlayer.Character)
-            if localRoot then
-                workspace.CurrentCamera.CameraSubject = localRoot
-                workspace.CurrentCamera.CameraType = Enum.CameraType.Custom
+            return foundPlayers
+        end
+
+        local function getRoot(character)
+            return character:FindFirstChild("HumanoidRootPart") or character:FindFirstChild("Torso") or character:FindFirstChild("UpperTorso")
+        end
+
+        local players = getPlayer(targetUsername, game.Players.LocalPlayer)
+
+        for _, v in pairs(players) do
+            if game.Players[v] and game.Players[v].Character then
+                local speaker = game.Players.LocalPlayer
+                local targetRoot = getRoot(game.Players[v].Character)
+                if targetRoot then
+                    workspace.CurrentCamera.CameraSubject = targetRoot
+                    workspace.CurrentCamera.CFrame = CFrame.new(targetRoot.Position + Vector3.new(0, 5, 10), targetRoot.Position)
+                end
             end
         end
-    end)
-
-   print("March10")
+    else
+        local localPlayer = game.Players.LocalPlayer
+        local localRoot = getRoot(localPlayer.Character)
+        if localRoot then
+            workspace.CurrentCamera.CameraSubject = localRoot
+            workspace.CurrentCamera.CameraType = Enum.CameraType.Custom
+        end
+    end
 end)
 
 Other:CreateButton("Get My Position", function()
