@@ -61,7 +61,10 @@ local OtherWindow = Library:NewWindow("nozcy's hub")
 local Other = OtherWindow:NewSection("Misc")
 
 Other:CreateTextbox("Username", function(text)
-    Other:CreateToggle("View Player", function(value)
+        targetUsername = text
+end)
+
+Other:CreateToggle("View Player", function(value)
         if value then
             local function getPlayer(username, speaker)
                 local foundPlayers = {}
@@ -90,7 +93,6 @@ Other:CreateTextbox("Username", function(text)
                 end
             end
         else
-            -- Reset the camera to the local player
             local localPlayer = game.Players.LocalPlayer
             local localRoot = getRoot(localPlayer.Character)
             if localRoot then
@@ -98,6 +100,9 @@ Other:CreateTextbox("Username", function(text)
                 workspace.CurrentCamera.CameraType = Enum.CameraType.Custom
             end
         end
+    end)
+
+   print("March10")
 end)
 
 Other:CreateButton("Get My Position", function()
