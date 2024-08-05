@@ -60,46 +60,44 @@ local OtherWindow = Library:NewWindow("nozcy's hub")
 
 local Other = OtherWindow:NewSection("Misc")
 
-local targetUsername = nil
-
 Other:CreateTextbox("Username", function(text)
-    targetUsername = text
-end)
-
-Other:CreateToggle("View Player", function(value)
-    if targetUsername and targetUsername ~= "" then
+    Other:CreateToggle("View Player", function(value)
         if value then
-            local function getPlayer(username)
+            local function getPlayer(username, speaker)
+                local foundPlayers = {}
                 for _, player in pairs(game.Players:GetPlayers()) do
-                    if player.Name:lower() == username:lower() then
-                        return player
+                    if player.Name:lower():sub(1, #username) == username:lower() then
+                        table.insert(foundPlayers, player.Name)
                     end
                 end
-                return nil
+                return foundPlayers
             end
 
-            local function viewPlayer(player)
-                if player and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
-                    local camera = workspace.CurrentCamera
-                    camera.CameraSubject = player.Character.HumanoidRootPart
-                    camera.CameraType = Enum.CameraType.Scriptable
+            local function getRoot(character)
+                return character:FindFirstChild("HumanoidRootPart") or character:FindFirstChild("Torso") or character:FindFirstChild("UpperTorso")
+            end
+
+            local players = getPlayer(text, game.Players.LocalPlayer)
+
+            for _, v in pairs(players) do
+                if game.Players[v] and game.Players[v].Character then
+                    local speaker = game.Players.LocalPlayer
+                    local targetRoot = getRoot(game.Players[v].Character)
+                    if targetRoot then
+                        workspace.CurrentCamera.CameraSubject = targetRoot
+                        workspace.CurrentCamera.CFrame = CFrame.new(targetRoot.Position + Vector3.new(0, 5, 10), targetRoot.Position)
+                    end
                 end
             end
-
-            local targetPlayer = getPlayer(targetUsername)
-            if targetPlayer then
-                viewPlayer(targetPlayer)
-            else
-                print("Player not found.")
-            end
         else
-            local camera = workspace.CurrentCamera
-            camera.CameraSubject = game.Players.LocalPlayer.Character.HumanoidRootPart
-            camera.CameraType = Enum.CameraType.Custom
+            -- Reset the camera to the local player
+            local localPlayer = game.Players.LocalPlayer
+            local localRoot = getRoot(localPlayer.Character)
+            if localRoot then
+                workspace.CurrentCamera.CameraSubject = localRoot
+                workspace.CurrentCamera.CameraType = Enum.CameraType.Custom
+            end
         end
-    else
-        print("No username entered.")
-    end
 end)
 
 Other:CreateButton("Get My Position", function()
