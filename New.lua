@@ -1,6 +1,6 @@
 local Library = loadstring(Game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/wizard"))()
 
-local mainWindow = Library:NewWindow("nozcyy's hub")
+local mainWindow = Library:NewWindow("nozcy's hub")
 
 local main = mainWindow:NewSection("Map")
 
@@ -55,4 +55,83 @@ main:CreateButton("teleport", function()
             speakerRoot.CFrame = targetRoot.CFrame + Vector3.new(1, 1, 1)
         end
     end
+end)
+
+local OtherWindow = Library:NewWindow("nozcy's hub")
+
+local Other = OtherWindow:NewSection("Misc")
+
+Other:CreateTextbox("Username", function(text)
+    local targetUsername = text
+
+    Other:CreateToggle("View Player", function(value)
+        if value then
+            local function getPlayer(username)
+                for _, player in pairs(game.Players:GetPlayers()) do
+                    if player.Name:lower() == username:lower() then
+                        return player
+                    end
+                end
+                return nil
+            end
+
+            local function viewPlayer(player)
+                if player and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+                    local camera = workspace.CurrentCamera
+                    camera.CameraSubject = player.Character.HumanoidRootPart
+                    camera.CameraType = Enum.CameraType.Scriptable
+                end
+            end
+
+            local targetPlayer = getPlayer(targetUsername)
+            if targetPlayer then
+                viewPlayer(targetPlayer)
+            else
+                print("Player not found.")
+            end
+        else
+            local camera = workspace.CurrentCamera
+            camera.CameraSubject = game.Players.LocalPlayer.Character.HumanoidRootPart
+            camera.CameraType = Enum.CameraType.Custom
+        end
+    end)
+
+   print("March/10/2022")
+end)
+
+Other:CreateButton("Get My Position", function()
+    local player = game.Players.LocalPlayer
+    if player and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+        local position = player.Character.HumanoidRootPart.Position
+        local positionString = tostring(position)
+        print("Your current position is: " .. positionString)
+
+        if setclipboard then
+            setclipboard(positionString)
+            print("Position copied to clipboard!")
+        else
+            print("Clipboard functionality is not supported.")
+        end
+    else
+        print("Unable to find your position.")
+    end
+end)
+
+Other:CreateButton("Anti-AFK", function()
+    local Player = game.Players.LocalPlayer
+    local VirtualUser = game:GetService("VirtualUser")
+
+    Player.Idled:Connect(function()
+        VirtualUser:CaptureController()
+        VirtualUser:ClickButton2(Vector2.new())
+    end)
+
+    print("Anti-AFK Enabled")
+end)
+
+Other:CreateButton("low-gfx", function()
+    for i,v in next, (workspace:GetDescendants()) do
+ if v:IsA("Part") then v.Material = Enum.Material.SmoothPlastic
+ end
+ end
 end)
