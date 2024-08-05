@@ -96,7 +96,8 @@ Other:CreateTextbox("Username", function(text)
         end
     end)
 
-   print("March/10/2022")
+   print("kkk")
+        
 end)
 
 Other:CreateButton("Get My Position", function()
