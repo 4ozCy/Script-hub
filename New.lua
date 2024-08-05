@@ -94,7 +94,6 @@ Other:CreateToggle("View Player", function(value)
             camera.CameraSubject = game.Players.LocalPlayer.Character.HumanoidRootPart
             camera.CameraType = Enum.CameraType.Custom
         end
-    end)
 end)
 
 Other:CreateButton("Get My Position", function()
