@@ -65,35 +65,36 @@ Other:CreateTextbox("Username", function(text)
 end)
 
 Other:CreateToggle("View Player", function(value)
-    if value then
-        local function getPlayer(username)
-            for _, player in pairs(game.Players:GetPlayers()) do
-                if player.Name:lower() == username:lower() then
-                    return player
+        if value then
+            local function getPlayer(username)
+                for _, player in pairs(game.Players:GetPlayers()) do
+                    if player.Name:lower() == username:lower() then
+                        return player
+                    end
+                end
+                return nil
+            end
+
+            local function viewPlayer(player)
+                if player and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+                    local camera = workspace.CurrentCamera
+                    camera.CameraSubject = player.Character.HumanoidRootPart
+                    camera.CameraType = Enum.CameraType.Scriptable
                 end
             end
-            return nil
-        end
 
-        local function viewPlayer(player)
-            if player and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
-                local camera = workspace.CurrentCamera
-                camera.CameraSubject = player.Character.HumanoidRootPart
-                camera.CameraType = Enum.CameraType.Scriptable
+            local targetPlayer = getPlayer(targetUsername)
+            if targetPlayer then
+                viewPlayer(targetPlayer)
+            else
+                print("Player not found.")
             end
-        end
-
-        local targetPlayer = getPlayer(targetUsername)
-        if targetPlayer then
-            viewPlayer(targetPlayer)
         else
-            print("Player not found.")
+            local camera = workspace.CurrentCamera
+            camera.CameraSubject = game.Players.LocalPlayer.Character.HumanoidRootPart
+            camera.CameraType = Enum.CameraType.Custom
         end
-    else
-        local camera = workspace.CurrentCamera
-        camera.CameraSubject = game.Players.LocalPlayer.Character.HumanoidRootPart
-        camera.CameraType = Enum.CameraType.Custom
-    end
+    end)
 end)
 
 Other:CreateButton("Get My Position", function()
