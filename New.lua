@@ -110,6 +110,23 @@ Other:CreateToggle("View Player", function(value)
     end
 end)
 
+Other:CreateToggle("Fake Lag", function(value)
+    local lagEnabled = value
+    local lagDelay = 0.3
+
+    if lagEnabled then
+        local function fakeLag()
+            while lagEnabled do
+                game:GetService("RunService").Heartbeat:Wait()
+                wait(lagDelay)
+            end
+        end
+        fakeLag()
+    else
+        print("Lag disabled")
+    end
+end)
+
 Other:CreateButton("Get My Position", function()
     local player = game.Players.LocalPlayer
     if player and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
