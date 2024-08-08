@@ -313,3 +313,7 @@ Other:CreateButton("low-gfx", function()
  end
  end
 end)
+
+Other:CreateButton("Rejoin", function()
+game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, game.JobId)
+end)
