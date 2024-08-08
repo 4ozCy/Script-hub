@@ -60,59 +60,9 @@ local OtherWindow = Library:NewWindow("nozcy's hub")
 
 local Other = OtherWindow:NewSection("Misc")
 
-Other:CreateTextbox("Username", function(text)
-    targetUsername = text
-end)
-
-Other:CreateToggle("View Player", function(value)
-    if value then
-        local players = getPlayer(targetUsername, game.Players.LocalPlayer)
-        for i, v in pairs(players) do
-            if viewDied then
-                viewDied:Disconnect()
-                viewChanged:Disconnect()
-            end
-            viewing = game.Players[v]
-            if viewing and viewing.Character then
-                workspace.CurrentCamera.CameraSubject = viewing.Character
-                notify('Spectate', 'Viewing ' .. game.Players[v].Name)
-
-                local function viewDiedFunc()
-                    repeat wait() until game.Players[v].Character ~= nil and getRoot(game.Players[v].Character)
-                    workspace.CurrentCamera.CameraSubject = viewing.Character
-                end
-
-                viewDied = game.Players[v].CharacterAdded:Connect(viewDiedFunc)
-
-                local function viewChangedFunc()
-                    workspace.CurrentCamera.CameraSubject = viewing.Character
-                end
-
-                viewChanged = workspace.CurrentCamera:GetPropertyChangedSignal("CameraSubject"):Connect(viewChangedFunc)
-            else
-                print("Error: Could not find character for player " .. game.Players[v].Name)
-            end
-        end
-    else
-        -- Reset the camera to the local player when the toggle is turned off
-        if viewDied then
-            viewDied:Disconnect()
-        end
-        if viewChanged then
-            viewChanged:Disconnect()
-        end
-        local localPlayer = game.Players.LocalPlayer
-        local localRoot = getRoot(localPlayer.Character)
-        if localRoot then
-            workspace.CurrentCamera.CameraSubject = localRoot
-            workspace.CurrentCamera.CameraType = Enum.CameraType.Custom
-        end
-    end
-end)
-
 Other:CreateToggle("Fake Lag", function(value)
     local lagEnabled = value
-    local lagDelay = 0.3
+    local lagDelay = 15
 
     if lagEnabled then
         local function fakeLag()
