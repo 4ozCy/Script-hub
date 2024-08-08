@@ -239,6 +239,16 @@ local OtherWindow = Library:NewWindow("nozcy's hub")
 
 local Other = OtherWindow:NewSection("Misc")
 
+Other:CreateTextbox("Fov", function(text)
+    local fovValue = tonumber(text)
+    if fovValue then
+        local clampedFOV = math.clamp(fovValue, 30, 150)
+        workspace.CurrentCamera.FieldOfView = clampedFOV
+    else
+        workspace.CurrentCamera.FieldOfView = 50
+    end
+end)
+
 Other:CreateButton("Get My Position", function()
     local player = game.Players.LocalPlayer
     if player and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
