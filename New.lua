@@ -61,38 +61,46 @@ local OtherWindow = Library:NewWindow("nozcy's hub")
 local Other = OtherWindow:NewSection("Misc")
 
 Other:CreateTextbox("Username", function(text)
-        targetUsername = text
+    targetUsername = text
 end)
 
 Other:CreateToggle("View Player", function(value)
     if value then
-        local function getPlayer(username, speaker)
-            local foundPlayers = {}
-            for _, player in pairs(game.Players:GetPlayers()) do
-                if player.Name:lower():sub(1, #username) == username:lower() then
-                    table.insert(foundPlayers, player.Name)
-                end
-            end
-            return foundPlayers
-        end
-
-        local function getRoot(character)
-            return character:FindFirstChild("HumanoidRootPart") or character:FindFirstChild("Torso") or character:FindFirstChild("UpperTorso")
-        end
-
         local players = getPlayer(targetUsername, game.Players.LocalPlayer)
+        for i, v in pairs(players) do
+            if viewDied then
+                viewDied:Disconnect()
+                viewChanged:Disconnect()
+            end
+            viewing = game.Players[v]
+            if viewing and viewing.Character then
+                workspace.CurrentCamera.CameraSubject = viewing.Character
+                notify('Spectate', 'Viewing ' .. game.Players[v].Name)
 
-        for _, v in pairs(players) do
-            if game.Players[v] and game.Players[v].Character then
-                local speaker = game.Players.LocalPlayer
-                local targetRoot = getRoot(game.Players[v].Character)
-                if targetRoot then
-                    workspace.CurrentCamera.CameraSubject = targetRoot
-                    workspace.CurrentCamera.CFrame = CFrame.new(targetRoot.Position + Vector3.new(0, 5, 10), targetRoot.Position)
+                local function viewDiedFunc()
+                    repeat wait() until game.Players[v].Character ~= nil and getRoot(game.Players[v].Character)
+                    workspace.CurrentCamera.CameraSubject = viewing.Character
                 end
+
+                viewDied = game.Players[v].CharacterAdded:Connect(viewDiedFunc)
+
+                local function viewChangedFunc()
+                    workspace.CurrentCamera.CameraSubject = viewing.Character
+                end
+
+                viewChanged = workspace.CurrentCamera:GetPropertyChangedSignal("CameraSubject"):Connect(viewChangedFunc)
+            else
+                print("Error: Could not find character for player " .. game.Players[v].Name)
             end
         end
     else
+        -- Reset the camera to the local player when the toggle is turned off
+        if viewDied then
+            viewDied:Disconnect()
+        end
+        if viewChanged then
+            viewChanged:Disconnect()
+        end
         local localPlayer = game.Players.LocalPlayer
         local localRoot = getRoot(localPlayer.Character)
         if localRoot then
