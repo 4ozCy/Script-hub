@@ -30,7 +30,7 @@ main:CreateButton("under map", function()
 local player = game.Players.LocalPlayer
 local humanoidRootPart = player.Character.HumanoidRootPart
 
-local teleportPosition1 = CFrame.new(-79.09889221191406, 192.86883544921875, -247.15036010742188)
+local teleportPosition1 = CFrame.new(249.52169799804688, 116.16133117675781, 1094.6927490234375)
 local teleportPosition2 = CFrame.new(13.025981903076172, 661.2735595703125, -157.4413299560547)
 humanoidRootPart.CFrame = teleportPosition1
 wait(1.1)
