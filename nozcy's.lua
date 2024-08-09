@@ -4,7 +4,7 @@ local mainWindow = Library:NewWindow("nozcy's hub")
 
 local main = mainWindow:NewSection("Map")
 
-main:CreateButton("teleport", function()
+main:CreateButton("under map", function()
 local player = game.Players.LocalPlayer
 local humanoidRootPart = player.Character.HumanoidRootPart
 
@@ -14,6 +14,16 @@ local teleportPosition2 = CFrame.new(-22.259986877441406, 472.40972900390625, 11
 humanoidRootPart.CFrame = teleportPosition1
 wait(2.5)
 humanoidRootPart.CFrame = teleportPosition2 
+end)
+
+main:CreateButton("mountain", function()
+local teleportPosition = Vector3.new(360.623, 699.103, 374.761)
+
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local rootPart = character:WaitForChild("HumanoidRootPart")
+
+rootPart.CFrame = CFrame.new(teleportPosition)
 end)
 
 local main = mainWindow:NewSection("Player")
