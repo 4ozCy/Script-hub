@@ -4,7 +4,7 @@ local mainWindow = Library:NewWindow("nozcy's hub")
 
 local main = mainWindow:NewSection("Map")
 
-main:CreateButton("under map", function()
+main:CreateButton("small place", function()
 local player = game.Players.LocalPlayer
 local humanoidRootPart = player.Character.HumanoidRootPart
 
@@ -12,7 +12,7 @@ local teleportPosition1 = CFrame.new(287.6754, 439.5106, 480.3295)
 local teleportPosition2 = CFrame.new(-22.259986877441406, 472.40972900390625, 113.41948699951172)
 
 humanoidRootPart.CFrame = teleportPosition1
-wait(2.5)
+wait(2.3)
 humanoidRootPart.CFrame = teleportPosition2 
 end)
 
@@ -24,6 +24,27 @@ local character = player.Character or player.CharacterAdded:Wait()
 local rootPart = character:WaitForChild("HumanoidRootPart")
 
 rootPart.CFrame = CFrame.new(teleportPosition)
+end)
+
+main:CreateButton("under map", function()
+local player = game.Players.LocalPlayer
+local humanoidRootPart = player.Character.HumanoidRootPart
+
+local teleportPosition1 = CFrame.new(121.40206909179688, 411.7425842285156, -154.59866333007812)
+local teleportPosition2 = CFrame.new(13.025981903076172, 661.2735595703125, -157.4413299560547)
+humanoidRootPart.CFrame = teleportPosition1
+wait(1)
+humanoidRootPart.CFrame = teleportPosition2
+end)
+
+main:CreateButton("basement", function()
+local teleportS = Vector3.New(-226.13389587402344, 439.5106201171875, -404.4796142578125)
+
+local player = game.Player.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local rootPart = character:WaitForChild("HumanoidRootPart")
+
+rootPart.CFream = CFream.new(teleportS)
 end)
 
 local main = mainWindow:NewSection("Player")
