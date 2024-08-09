@@ -30,7 +30,7 @@ main:CreateButton("under map", function()
 local player = game.Players.LocalPlayer
 local humanoidRootPart = player.Character.HumanoidRootPart
 
-local teleportPosition1 = CFrame.new(121.40206909179688, 411.7425842285156, -154.59866333007812)
+local teleportPosition1 = CFrame.new(-79.09889221191406, 192.86883544921875, -247.15036010742188)
 local teleportPosition2 = CFrame.new(13.025981903076172, 661.2735595703125, -157.4413299560547)
 humanoidRootPart.CFrame = teleportPosition1
 wait(1)
@@ -38,13 +38,13 @@ humanoidRootPart.CFrame = teleportPosition2
 end)
 
 main:CreateButton("basement", function()
-local teleportS = Vector3.New(-226.13389587402344, 439.5106201171875, -404.4796142578125)
+local teleportPosition = Vector3.new(13.025981903076172, 661.2735595703125, -157.4413299560547)
 
-local player = game.Player.LocalPlayer
+local player = game.Players.LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
 local rootPart = character:WaitForChild("HumanoidRootPart")
 
-rootPart.CFream = CFream.new(teleportS)
+rootPart.CFrame = CFrame.new(teleportPosition)
 end)
 
 local main = mainWindow:NewSection("Player")
