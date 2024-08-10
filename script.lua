@@ -2,8 +2,6 @@ local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/blood
 
 local main = library:Window("nozcy's hub")
 
-main:Label("Main" Color3.fromRGB(127, 143, 166))
-
 main:Button("Small Place", function()
 local player = game.Players.LocalPlayer
 local humanoidRootPart = player.Character.HumanoidRootPart
