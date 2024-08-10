@@ -44,15 +44,13 @@ local rootPart = character:WaitForChild("HumanoidRootPart")
 rootPart.CFrame = CFrame.new(teleportPosition)
 end)
 
-local other = library:Window("nozcy's hub")
+main:Label("Misc", Color3.fromRGB(127, 143, 166))
 
-other:Label("Misc", Color3.fromRGB(127, 143, 166))
-
-other:Box("Username", function(text)
+main:Box("Username", function(text)
 targetUsername = text
 end)
 
-misc:Button("teleport", function()
+main:Button("teleport", function()
 local function getPlayer(username, speaker)
         local foundPlayers = {}
         for _, player in pairs(game.Players:GetPlayers()) do
@@ -85,4 +83,3 @@ local function getPlayer(username, speaker)
         end
     end
 end)
-  
