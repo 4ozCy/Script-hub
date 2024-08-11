@@ -262,3 +262,37 @@ local function getPlayer(username, speaker)
         end
     end
 end)
+
+main:Button("Small Server Hop", function()
+local TeleportService = game:GetService("TeleportService")
+local HttpService = game:GetService("HttpService")
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+
+local function getServerList()
+    local servers = {}
+    local success, result = pcall(function()
+        return HttpService:JSONDecode(game:HttpGet("https://games.roblox.com/v1/games/" .. game.PlaceId .. "/servers/Public?sortOrder=Asc&limit=100"))
+    end)
+    if success then
+        for _, server in pairs(result.data) do
+            if server.playing < server.maxPlayers then
+                table.insert(servers, {id = server.id, players = server.playing})
+            end
+        end
+        table.sort(servers, function(a, b) return a.players < b.players end)
+    end
+    return servers
+end
+
+local function serverHop()
+    local servers = getServerList()
+    if #servers > 0 then
+        TeleportService:TeleportToPlaceInstance(game.PlaceId, servers[1].id, LocalPlayer)
+    else
+        warn("No available servers to hop to.")
+    end
+end
+
+serverHop()
+end)
