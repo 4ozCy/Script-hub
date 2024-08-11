@@ -1,6 +1,6 @@
 local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/turtle"))()
 
-local main = library:Window("nozcy's hub")
+local main = library:Window("4ozCy hub")
 
 main:Button("Small Place", function()
 local player = game.Players.LocalPlayer
@@ -223,9 +223,9 @@ end)
    print("esp enable")
 end)
 
-main:Label("Misc", Color3.fromRGB(127, 143, 166))
+main:Label("Player", Color3.fromRGB(127, 143, 166))
 
-main:Box("Username", function(text)
+main:Box("Username:", function(text)
 targetUsername = text
 end)
 
