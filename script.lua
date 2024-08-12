@@ -225,6 +225,31 @@ end)
 
 main:Label("Player", Color3.fromRGB(127, 143, 166))
 
+main:Button("Pickup Line", function()
+    local HttpService = game:GetService("HttpService")
+    local replicatedStorage = game:GetService("ReplicatedStorage")
+    local apiEndpoint = "https://api.jcwyt.com/pickup"
+
+    local success, response = pcall(function()
+        return HttpService:GetAsync(apiEndpoint)
+    end)
+    
+    local line
+    if success then
+        local data = HttpService:JSONDecode(response)
+        line = data.line
+    else
+        line = "Sorry, I couldn't think of anything!"
+    end
+    
+    local modernChatService = replicatedStorage:FindFirstChild("DefaultChatSystemChatEvents")
+    if modernChatService then
+        modernChatService:WaitForChild("SayMessageRequest"):FireServer(line, "All")
+    else
+        game:GetService("Players").LocalPlayer:Chatted(line)
+    end
+end)
+
 main:Box("Username:", function(text)
 targetUsername = text
 end)
