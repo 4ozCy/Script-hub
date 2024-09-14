@@ -38,7 +38,7 @@ humanoidRootPart.CFrame = teleportPosition2
 end)
 
 main:CreateButton("basement", function()
-local teleportPosition = Vector3.new(567.5752563476562, 439.5106201171875, -414.8644714355469)
+local teleportPosition = Vector3.new(-152.1856689453125, 439.51055908203125, -370.9204406738281)
 
 local player = game.Players.LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
