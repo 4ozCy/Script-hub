@@ -2,12 +2,115 @@ local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/blood
 
 local main = library:Window("Aimbot & Esp")
 
+main:Toggle("Aimbot", true, function(bool)
+    local fov = 90
+    local maxDistance = 400
+    local maxTransparency = 0.1
+    local teamCheck = true
 
+    local RunService = game:GetService("RunService")
+    local UserInputService = game:GetService("UserInputService")
+    local Players = game:GetService("Players")
+    local Cam = game.Workspace.CurrentCamera
 
-mainButton("ESP", function()
+    local FOVring = Drawing.new("Circle")
+    FOVring.Visible = true
+    FOVring.Thickness = 2
+    FOVring.Color = Color3.fromRGB(128, 0, 128)
+    FOVring.Filled = false
+    FOVring.Radius = fov
+    FOVring.Position = Cam.ViewportSize / 2
+
+    local aimbotEnabled = bool
+
+    local function updateDrawings()
+        local camViewportSize = Cam.ViewportSize
+        FOVring.Position = camViewportSize / 2
+    end
+
+    local function onKeyDown(input)
+        if input.KeyCode == Enum.KeyCode.Delete then
+            RunService:UnbindFromRenderStep("FOVUpdate")
+            FOVring:Remove()
+        end
+    end
+
+    UserInputService.InputBegan:Connect(onKeyDown)
+
+    local function lookAt(target)
+        local lookVector = (target - Cam.CFrame.Position).unit
+        local newCFrame = CFrame.new(Cam.CFrame.Position, Cam.CFrame.Position + lookVector)
+        Cam.CFrame = newCFrame
+    end
+
+    local function calculateTransparency(distance)
+        local maxDistance = fov
+        local transparency = (1 - (distance / maxDistance)) * maxTransparency
+        return transparency
+    end
+
+    local function isPlayerAlive(player)
+        local character = player.Character
+        if character and character:FindFirstChild("Humanoid") then
+            return character.Humanoid.Health > 0
+        end
+        return false
+    end
+
+    local function getClosestPlayerInFOV(trg_part)
+        local nearest = nil
+        local last = math.huge
+        local playerMousePos = Cam.ViewportSize / 2
+        local localPlayer = Players.LocalPlayer
+
+        for i = 1, #Players:GetPlayers() do
+            local player = Players:GetPlayers()[i]
+            if player and player ~= localPlayer then
+                if player.Team ~= localPlayer.Team then
+                    if isPlayerAlive(player) then
+                        local part = player.Character and player.Character:FindFirstChild(trg_part)
+                        if part then
+                            local ePos, isVisible = Cam:WorldToViewportPoint(part.Position)
+                            local distance = (Vector2.new(ePos.x, ePos.y) - playerMousePos).Magnitude
+
+                            if distance < last and isVisible and distance < fov and distance < maxDistance then
+                                last = distance
+                                nearest = player
+                            end
+                        end
+                    end
+                end
+            end
+        end
+
+        return nearest
+    end
+
+    RunService.RenderStepped:Connect(function()
+        if aimbotEnabled then
+            updateDrawings()
+            local closest = getClosestPlayerInFOV("Head")
+            if closest and closest.Character:FindFirstChild("Head") then
+                lookAt(closest.Character.Head.Position)
+            end
+            
+            if closest then
+                local ePos, isVisible = Cam:WorldToViewportPoint(closest.Character.Head.Position)
+                local distance = (Vector2.new(ePos.x, ePos.y) - (Cam.ViewportSize / 2)).Magnitude
+                FOVring.Transparency = calculateTransparency(distance)
+            else
+                FOVring.Transparency = maxTransparency
+            end
+        end
+    end)
+
+     print("Aimbot enable")
+end)
+
+main:Button("ESP", function()
 local settings = {
     defaultcolor = Color3.fromRGB(255, 0, 0),
-    teamcheck = false,
+    teamcheck = true,
     teamcolor = true
 }
 
@@ -71,6 +174,7 @@ local function createEsp(player)
     drawings.healthoutline.Visible = false
     drawings.healthoutline.ZIndex = 2  -- Ensure it's between box and health bar
 
+    -- Distance
     drawings.distance = newDrawing("Text")
     drawings.distance.Size = 16
     drawings.distance.Center = true
@@ -80,6 +184,7 @@ local function createEsp(player)
     drawings.distance.Visible = false
     drawings.distance.Font = 3
 
+    -- Username
     drawings.username = newDrawing("Text")
     drawings.username.Size = 16
     drawings.username.Center = true
@@ -89,6 +194,7 @@ local function createEsp(player)
     drawings.username.Visible = false
     drawings.username.Font = 3
 
+    -- Health Percent
     drawings.healthPercent = newDrawing("Text")
     drawings.healthPercent.Size = 16
     drawings.healthPercent.Center = true
@@ -202,6 +308,6 @@ runService:BindToRenderStep("esp", Enum.RenderPriority.Camera.Value, function()
         end
     end
 end)
-
-  print("esp enable")
+        
+  print("esp open")
 end)
