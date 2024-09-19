@@ -77,7 +77,7 @@ end
 local function removeEsp(player)
     if rawget(espCache, player) then
         for _, drawing in next, espCache[player] do
-            drawing.Visible = false -- Hide the ESP elements
+            drawing.Visible = false
             drawing:Remove()
         end
         espCache[player] = nil
@@ -185,7 +185,7 @@ ScreenGui.Parent = game.CoreGui
 local ToggleButton = Instance.new("TextButton", ScreenGui)
 
 ToggleButton.Size = UDim2.new(0, 100, 0, 100)
-ToggleButton.Position = UDim2.new(0.05, 0, 0.05, 0)
+ToggleButton.Position = UDim2.new(0.85, 0, 0.05, 0)
 ToggleButton.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
 ToggleButton.Text = "ESP ON"
 ToggleButton.TextScaled = true
