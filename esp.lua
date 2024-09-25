@@ -34,7 +34,7 @@ local espCache = {}
 local function createEsp(player)
     local drawings = {}
     drawings.box = newDrawing("Square")
-    drawings.box.Thickness = 1
+    drawings.box.Thickness = 1.3
     drawings.box.Filled = false
     drawings.box.Color = settings.defaultcolor
     drawings.box.Visible = false
@@ -50,21 +50,21 @@ local function createEsp(player)
     drawings.distance.Center = true
     drawings.distance.Color = Color3.new(1, 1, 1)
     drawings.distance.Visible = false
-    drawings.distance.Font = 6
+    drawings.distance.Font = 2
 
     drawings.username = newDrawing("Text")
     drawings.username.Size = 16
     drawings.username.Center = true
     drawings.username.Color = Color3.new(1, 1, 1)
     drawings.username.Visible = false
-    drawings.username.Font = 6
+    drawings.username.Font = 2
 
     drawings.healthPercent = newDrawing("Text")
     drawings.healthPercent.Size = 16
     drawings.healthPercent.Center = true
     drawings.healthPercent.Color = Color3.new(1, 1, 1)
     drawings.healthPercent.Visible = false
-    drawings.healthPercent.Font = 6
+    drawings.healthPercent.Font = 2
 
     drawings.tracer = newDrawing("Line")
     drawings.tracer.Thickness = 1
@@ -189,7 +189,7 @@ ToggleButton.Position = UDim2.new(0.85, 0, 0.05, 0)
 ToggleButton.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
 ToggleButton.Text = "ESP ON"
 ToggleButton.TextScaled = true
-ToggleButton.Font = 6
+ToggleButton.Font = 2
 ToggleButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 ToggleButton.BorderSizePixel = 0
 ToggleButton.BackgroundTransparency = 0.5
