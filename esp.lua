@@ -50,21 +50,21 @@ local function createEsp(player)
     drawings.distance.Center = true
     drawings.distance.Color = Color3.new(1, 1, 1)
     drawings.distance.Visible = false
-    drawings.distance.Font = 2
+    drawings.distance.Font = 10
 
     drawings.username = newDrawing("Text")
     drawings.username.Size = 16
     drawings.username.Center = true
     drawings.username.Color = Color3.new(1, 1, 1)
     drawings.username.Visible = false
-    drawings.username.Font = 2
+    drawings.username.Font = 10
 
     drawings.healthPercent = newDrawing("Text")
     drawings.healthPercent.Size = 16
     drawings.healthPercent.Center = true
     drawings.healthPercent.Color = Color3.new(1, 1, 1)
     drawings.healthPercent.Visible = false
-    drawings.healthPercent.Font = 2
+    drawings.healthPercent.Font = 10
 
     drawings.tracer = newDrawing("Line")
     drawings.tracer.Thickness = 1
@@ -89,7 +89,7 @@ local function updateEsp(player, esp)
     if character and settings.espEnabled then
         local humanoid = character:FindFirstChildOfClass("Humanoid")
         local rootPart = character:FindFirstChild("HumanoidRootPart")
-        if rootPart and humanoid then
+        if rootPart and humanoid and humanoid.Health > 0 then
             local cframe = rootPart.CFrame
             local position, visible, depth = wtvp(cframe.Position)
             esp.box.Visible = visible
@@ -99,7 +99,7 @@ local function updateEsp(player, esp)
             esp.healthPercent.Visible = visible
             esp.tracer.Visible = visible
 
-            if cframe and visible then
+            if visible then
                 local scaleFactor = 1 / (depth * tan(rad(camera.FieldOfView / 2)) * 2) * 1000
                 local width, height = round(3 * scaleFactor, 5 * scaleFactor)
                 local x, y = round(position.X, position.Y)
@@ -162,12 +162,10 @@ end)
 runService:BindToRenderStep("esp", Enum.RenderPriority.Camera.Value, function()
     if settings.espEnabled then
         for player, drawings in next, espCache do
-            if settings.teamcheck and player.Team == localPlayer.Team then
-                continue
-            end
-
-            if drawings and player ~= localPlayer then
-                updateEsp(player, drawings)
+            if not (settings.teamcheck and player.Team == localPlayer.Team) then
+                if drawings and player ~= localPlayer then
+                    updateEsp(player, drawings)
+                end
             end
         end
     else
@@ -183,13 +181,12 @@ local ScreenGui = Instance.new("ScreenGui")
 ScreenGui.Parent = game.CoreGui
 
 local ToggleButton = Instance.new("TextButton", ScreenGui)
-
 ToggleButton.Size = UDim2.new(0, 100, 0, 100)
 ToggleButton.Position = UDim2.new(0.85, 0, 0.05, 0)
 ToggleButton.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
 ToggleButton.Text = "ESP ON"
 ToggleButton.TextScaled = true
-ToggleButton.Font = 2
+ToggleButton.Font = 10
 ToggleButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 ToggleButton.BorderSizePixel = 0
 ToggleButton.BackgroundTransparency = 0.5
