@@ -9,7 +9,7 @@ local currentTarget = nil
 local hue = 0
 local teamCheckDecided = false
 
-local fov = 140
+local fov = 135
 local FOVring = Drawing.new("Circle")
 FOVring.Visible = true
 FOVring.Thickness = 2
@@ -38,7 +38,7 @@ ToggleButton.Position = UDim2.new(0.05, 0, 0.05, 0)
 ToggleButton.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
 ToggleButton.Text = "AIMBOT OFF"
 ToggleButton.TextScaled = true
-ToggleButton.Font = Enum.Font.SourceSansBold
+ToggleButton.Font = Enum.Font.IndieFlower
 ToggleButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 ToggleButton.BorderSizePixel = 0
 ToggleButton.BackgroundTransparency = 0.5
@@ -59,7 +59,7 @@ NotificationText.Position = UDim2.new(0, 0, 0, 0)
 NotificationText.BackgroundTransparency = 1
 NotificationText.Text = "Enable Team Check?"
 NotificationText.TextScaled = true
-NotificationText.Font = Enum.Font.SourceSansBold
+NotificationText.Font = Enum.Font.IndieFlower
 NotificationText.TextColor3 = Color3.fromRGB(255, 255, 255)
 
 local YesButton = Instance.new("TextButton", NotificationFrame)
@@ -68,7 +68,7 @@ YesButton.Position = UDim2.new(0.1, 0, 0.65, 0)
 YesButton.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
 YesButton.Text = "Yes"
 YesButton.TextScaled = true
-YesButton.Font = Enum.Font.SourceSansBold
+YesButton.Font = Enum.Font.IndieFlower
 YesButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 
 local NoButton = Instance.new("TextButton", NotificationFrame)
@@ -77,7 +77,7 @@ NoButton.Position = UDim2.new(0.5, 0, 0.65, 0)
 NoButton.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
 NoButton.Text = "No"
 NoButton.TextScaled = true
-NoButton.Font = Enum.Font.SourceSansBold
+NoButton.Font = Enum.Font.IndieFlower
 NoButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 
 local function showAimbotToggle()
