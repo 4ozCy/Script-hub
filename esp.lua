@@ -50,21 +50,21 @@ local function createEsp(player)
     drawings.distance.Center = true
     drawings.distance.Color = Color3.new(1, 1, 1)
     drawings.distance.Visible = false
-    drawings.distance.Font = 3
+    drawings.distance.Font = 5
 
     drawings.username = newDrawing("Text")
     drawings.username.Size = 16
     drawings.username.Center = true
     drawings.username.Color = Color3.new(1, 1, 1)
     drawings.username.Visible = false
-    drawings.username.Font = 3
+    drawings.username.Font = 5
 
     drawings.healthPercent = newDrawing("Text")
     drawings.healthPercent.Size = 16
     drawings.healthPercent.Center = true
     drawings.healthPercent.Color = Color3.new(1, 1, 1)
     drawings.healthPercent.Visible = false
-    drawings.healthPercent.Font = 3
+    drawings.healthPercent.Font = 5
 
     drawings.tracer = newDrawing("Line")
     drawings.tracer.Thickness = 1
@@ -186,7 +186,7 @@ ToggleButton.Position = UDim2.new(0.85, 0, 0.05, 0)
 ToggleButton.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
 ToggleButton.Text = "ESP ON"
 ToggleButton.TextScaled = true
-ToggleButton.Font = 3
+ToggleButton.Font = Enum.font.IndieFlower
 ToggleButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 ToggleButton.BorderSizePixel = 0
 ToggleButton.BackgroundTransparency = 0.5
