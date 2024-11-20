@@ -99,6 +99,13 @@ local Button = Tab:CreateButton({
    end,
 })
 
+local Button = Tab:CreateButton({
+   Name = "Shift-lock",
+   Callback = function()
+   loadstring(game:HttpGet('https://pastebin.com/raw/CjNsnSDy'))()
+    end,
+})
+
 local Toggle = Tab:CreateToggle({
     Name = "anti-afk",
     CurrentValue = false,
@@ -132,9 +139,153 @@ local Toggle = Tab:CreateToggle({
     end,
 })
 
-local Button = Tab:CreateButton({
-   Name = "Shift-lock",
-   Callback = function()
-   loadstring(game:HttpGet('https://pastebin.com/raw/CjNsnSDy'))()
+local Toggle = Tab:CreateToggle({
+    Name = "Noclip",
+    CurrentValue = false,
+    Flag = "Toggle2",
+    Callback = function(Value)
+        local player = game.Players.LocalPlayer
+        if player and player.Character then
+            local humanoid = player.Character:FindFirstChild("Humanoid")
+            if humanoid then
+                if Value then
+                    humanoid.PlatformStand = true
+                    player.Character:FindFirstChild("HumanoidRootPart").Anchored = true
+                else
+                    humanoid.PlatformStand = false
+                    player.Character:FindFirstChild("HumanoidRootPart").Anchored = false
+                end
+            end
+        end
+    end,
+})
+
+local Slider = Tab:CreateSlider({
+    Name = "Speed",
+    Range = {16, 1000},
+    Increment = 1,
+    Suffix = "Speed",
+    CurrentValue = 16,
+    Flag = "Slider1",
+    Callback = function(Value)
+        local player = game.Players.LocalPlayer
+        if player and player.Character and player.Character:FindFirstChild("Humanoid") then
+            player.Character.Humanoid.WalkSpeed = Value
+        end
+    end,
+})
+
+local Slider = Tab:CreateSlider({
+    Name = "POV",
+    Range = {70, 120},
+    Increment = 1,
+    Suffix = "FOV",
+    CurrentValue = 70,
+    Flag = "Slider2",
+    Callback = function(Value)
+        local player = game.Players.LocalPlayer
+        if player and player:FindFirstChild("Camera") then
+            workspace.CurrentCamera.FieldOfView = Value
+        end
+    end,
+})
+
+local Slider = Tab:CreateSlider({
+    Name = "Jump Power",
+    Range = {50, 200},
+    Increment = 1,
+    Suffix = "Jump Power",
+    CurrentValue = 50,
+    Flag = "Slider3",
+    Callback = function(Value)
+        local player = game.Players.LocalPlayer
+        if player and player.Character and player.Character:FindFirstChild("Humanoid") then
+            player.Character.Humanoid.JumpPower = Value
+        end
+    end,
+})
+
+local Tab = Window:CreateTab("Music", "music")
+
+local sound
+
+local Dropdown = MusicTab:CreateDropdown({
+    Name = "Music List",
+    Options = {"Song 1", "Song 2", "Song 3", "Song 4"},
+    CurrentOption = {"Song 1"},
+    MultipleOptions = false,
+    Flag = "Dropdown1",
+    Callback = function(Options)
+        local selectedSong = Options[1]
+        local soundId
+        
+        if selectedSong == "Song 1" then
+            soundId = "rbxassetid://1234567890"
+        elseif selectedSong == "Song 2" then
+            soundId = "rbxassetid://2345678901"
+        elseif selectedSong == "Song 3" then
+            soundId = "rbxassetid://3456789012"
+        elseif selectedSong == "Song 4" then
+            soundId = "rbxassetid://4567890123"
+        end
+        
+        if sound then
+            sound:Stop()
+        end
+
+        sound = Instance.new("Sound")
+        sound.SoundId = soundId
+        sound.Parent = game.Players.LocalPlayer.Character.HumanoidRootPart
+        sound:Play()
+        
+        Rayfield:Notify({
+            Title = "Music Player",
+            Content = "Now playing: " .. selectedSong,
+            Duration = 5,
+            Image = 4483362458,
+        })
+    end,
+})
+
+local Toggle = MusicTab:CreateToggle({
+    Name = "Play/Stop Music",
+    CurrentValue = false,
+    Flag = "Toggle1",
+    Callback = function(Value)
+        if sound then
+            if Value then
+                sound:Play()
+            else
+                sound:Stop()
+            end
+        end
+    end,
+})
+
+local Slider = MusicTab:CreateSlider({
+    Name = "Volume",
+    Range = {0, 1},
+    Increment = 0.1,
+    Suffix = "%",
+    CurrentValue = 1,
+    Flag = "Slider1",
+    Callback = function(Value)
+        if sound then
+            sound.Volume = Value
+        end
+    end,
+})
+
+local Slider = MusicTab:CreateSlider({
+    Name = "Pitch",
+    Range = {0.1, 2},
+    Increment = 0.1,
+    Suffix = "x",
+    CurrentValue = 1,
+    Flag = "Slider2",
+    Callback = function(Value)
+        if sound then
+            sound.PlaybackSpeed = Value
+        end
     end,
 })
