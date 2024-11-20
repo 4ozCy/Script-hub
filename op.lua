@@ -197,7 +197,7 @@ local Section = MusicTab:CreateSection("Music")
 local Dropdown = MusicTab:CreateDropdown({
     Name = "Music List",
     Options = {"EHYUH", "Deja Vu", "Sinistra", "Chipi Chipi Chapa Chapa"},
-    CurrentOption = {"Song 1"},
+    CurrentOption = {"EHYUH"},
     MultipleOptions = false,
     Flag = "Dropdown1",
     Callback = function(Options)
@@ -215,15 +215,18 @@ local Dropdown = MusicTab:CreateDropdown({
         end
         
         if sound then
-            sound:Stop()
+            sound:Destroy()
         end
          
-        local sound
-        sound = Instance.new("Sound")
+                sound = Instance.new("Sound")
         sound.SoundId = soundId
+        sound.Volume = VolumeSlider.CurrentValue
+        sound.PlaybackSpeed = PitchSlider.CurrentValue
         sound.Parent = game.Players.LocalPlayer.Character.HumanoidRootPart
+        if PlayToggle.CurrentValue then
         sound:Play()
-        
+        end
+
         Rayfield:Notify({
             Title = "Music Player",
             Content = "Now playing: " .. selectedSong,
@@ -233,7 +236,7 @@ local Dropdown = MusicTab:CreateDropdown({
     end,
 })
 
-local Toggle = MusicTab:CreateToggle({
+local PlayToggle = MusicTab:CreateToggle({
     Name = "Play/Stop Music",
     CurrentValue = false,
     Flag = "Toggle1",
@@ -242,13 +245,13 @@ local Toggle = MusicTab:CreateToggle({
             if Value then
                 sound:Play()
             else
-                sound:Stop()
+                sound:Pause()
             end
         end
     end,
 })
 
-local Slider = MusicTab:CreateSlider({
+local VolumeSlider = MusicTab:CreateSlider({
     Name = "Volume",
     Range = {1, 100},
     Increment = 1,
@@ -262,7 +265,7 @@ local Slider = MusicTab:CreateSlider({
     end,
 })
 
-local Slider = MusicTab:CreateSlider({
+local PitchSlider = MusicTab:CreateSlider({
     Name = "Pitch",
     Range = {0.1, 2},
     Increment = 0.1,
