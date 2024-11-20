@@ -40,6 +40,76 @@ Rayfield:Notify({
 local Tab = Window:CreateTab("Main", 4483362458)
 local Section = Tab:CreateSection("Main")
 
+local dropdown = Tab:CreateDropdown({
+    Name = "Select Player to Teleport",
+    Options = (function()
+        local players = {}
+        for _, player in ipairs(game.Players:GetPlayers()) do
+            table.insert(players, player.Name)
+        end
+        return players
+    end)(),
+    CurrentOption = "",
+    MultipleOptions = false,
+    Flag = "PlayerDropdown",
+    Callback = function(selectedPlayer)
+    end,
+})
+
+game.Players.PlayerAdded:Connect(function()
+    local players = {}
+    for _, player in ipairs(game.Players:GetPlayers()) do
+        table.insert(players, player.Name)
+    end
+    dropdown:UpdateOptions(players)
+end)
+
+game.Players.PlayerRemoving:Connect(function()
+    local players = {}
+    for _, player in ipairs(game.Players:GetPlayers()) do
+        table.insert(players, player.Name)
+    end
+    dropdown:UpdateOptions(players)
+end)
+
+local Button = Tab:CreateButton({
+    Name = "Teleport",
+    Callback = function()
+        local selectedPlayer = dropdown.CurrentOption
+        local localPlayer = game.Players.LocalPlayer
+        local targetPlayer = game.Players:FindFirstChild(selectedPlayer)
+
+        if targetPlayer and targetPlayer.Character and targetPlayer.Character:FindFirstChild("HumanoidRootPart") then
+            local targetPosition = targetPlayer.Character.HumanoidRootPart.CFrame
+
+            if localPlayer.Character and localPlayer.Character:FindFirstChild("HumanoidRootPart") then
+                localPlayer.Character.HumanoidRootPart.CFrame = targetPosition
+
+                Rayfield:Notify({
+                    Title = "Teleport Successful",
+                    Content = "Teleported to " .. selectedPlayer,
+                    Duration = 5,
+                    Image = "circle-check",
+                })
+            else
+                Rayfield:Notify({
+                    Title = "Teleport Failed",
+                    Content = "Your character is not loaded.",
+                    Duration = 5,
+                    Image = "circle-x",
+                })
+            end
+        else
+            Rayfield:Notify({
+                Title = "Teleport Failed",
+                Content = "Player not found or target has no character.",
+                Duration = 5,
+                Image = "circle-x",
+            })
+        end
+    end,
+})
+
 local Button = Tab:CreateButton({
    Name = "aimbot & esp",
    Callback = function()
@@ -124,7 +194,7 @@ local Toggle = Tab:CreateToggle({
                 Title = "nozcy's hub",
                 Content = "Anti-AFK enabled",
                 Duration = 5,
-                Image = 4483362458,
+                Image = "toggle-right",
             })
         else
             for _, connection in pairs(getconnections(Players.LocalPlayer.Idled)) do
@@ -134,29 +204,8 @@ local Toggle = Tab:CreateToggle({
                 Title = "nozcy's hub",
                 Content = "Anti-AFK disabled",
                 Duration = 5,
-                Image = 4483362458,
+                Image = "toggle-left",
             })
-        end
-    end,
-})
-
-local Toggle = Tab:CreateToggle({
-    Name = "Noclip",
-    CurrentValue = false,
-    Flag = "Toggle2",
-    Callback = function(Value)
-        local player = game.Players.LocalPlayer
-        if player and player.Character then
-            local humanoid = player.Character:FindFirstChild("Humanoid")
-            if humanoid then
-                if Value then
-                    humanoid.PlatformStand = true
-                    player.Character:FindFirstChild("HumanoidRootPart").Anchored = true
-                else
-                    humanoid.PlatformStand = false
-                    player.Character:FindFirstChild("HumanoidRootPart").Anchored = false
-                end
-            end
         end
     end,
 })
@@ -231,13 +280,14 @@ local Toggle = Tab:CreateToggle({
                 Title = "Music played",
                 Content = "Now playing: " .. selectedSong,
                 Duration = 5,
-                Image = "music",
+                Image = "toggle-right",
             })
         else
             Rayfield:Notify({
                 Title = "Music Stopped",
+                Content = "Now Stop playing: " .. selectedSong,
                 Duration = 5,
-                Image = "music",
+                Image = "toggle-left",
             })
         end
     end,
