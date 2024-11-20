@@ -207,9 +207,7 @@ local Slider = Tab:CreateSlider({
 
 local Tab = Window:CreateTab("Music", "music")
 
-local sound
-
-local Dropdown = MusicTab:CreateDropdown({
+local Dropdown = Tab:CreateDropdown({
     Name = "Music List",
     Options = {"Song 1", "Song 2", "Song 3", "Song 4"},
     CurrentOption = {"Song 1"},
@@ -247,7 +245,7 @@ local Dropdown = MusicTab:CreateDropdown({
     end,
 })
 
-local Toggle = MusicTab:CreateToggle({
+local Toggle = Tab:CreateToggle({
     Name = "Play/Stop Music",
     CurrentValue = false,
     Flag = "Toggle1",
@@ -262,7 +260,7 @@ local Toggle = MusicTab:CreateToggle({
     end,
 })
 
-local Slider = MusicTab:CreateSlider({
+local Slider = Tab:CreateSlider({
     Name = "Volume",
     Range = {0, 1},
     Increment = 0.1,
@@ -276,7 +274,7 @@ local Slider = MusicTab:CreateSlider({
     end,
 })
 
-local Slider = MusicTab:CreateSlider({
+local Slider = Tab:CreateSlider({
     Name = "Pitch",
     Range = {0.1, 2},
     Increment = 0.1,
