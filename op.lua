@@ -33,11 +33,12 @@ local Window = Rayfield:CreateWindow({
 Rayfield:Notify({
    Title = "nozcy's hub",
    Content = "Version 1.0",
-   Duration = 5,
+   Duration = 4,
    Image = 4483362458,
 })
 
 local Tab = Window:CreateTab("Main", 4483362458)
+local Section = Tab:CreateSection("Main")
 
 local Button = Tab:CreateButton({
    Name = "aimbot & esp",
@@ -176,23 +177,8 @@ local Slider = Tab:CreateSlider({
 })
 
 local Slider = Tab:CreateSlider({
-    Name = "POV",
-    Range = {70, 120},
-    Increment = 1,
-    Suffix = "FOV",
-    CurrentValue = 70,
-    Flag = "Slider2",
-    Callback = function(Value)
-        local player = game.Players.LocalPlayer
-        if player and player:FindFirstChild("Camera") then
-            workspace.CurrentCamera.FieldOfView = Value
-        end
-    end,
-})
-
-local Slider = Tab:CreateSlider({
     Name = "Jump Power",
-    Range = {50, 200},
+    Range = {50, 2000},
     Increment = 1,
     Suffix = "Jump Power",
     CurrentValue = 50,
@@ -205,9 +191,10 @@ local Slider = Tab:CreateSlider({
     end,
 })
 
-local Tab = Window:CreateTab("Music", "music")
+local MusicTab = Window:CreateTab("Music", "music")
+local Section = Tab:CreateSection("Music")
 
-local Dropdown = Tab:CreateDropdown({
+local Dropdown = MusicTab:CreateDropdown({
     Name = "Music List",
     Options = {"Song 1", "Song 2", "Song 3", "Song 4"},
     CurrentOption = {"Song 1"},
@@ -240,12 +227,12 @@ local Dropdown = Tab:CreateDropdown({
             Title = "Music Player",
             Content = "Now playing: " .. selectedSong,
             Duration = 5,
-            Image = 4483362458,
+            Image = "music",
         })
     end,
 })
 
-local Toggle = Tab:CreateToggle({
+local Toggle = MusicTab:CreateToggle({
     Name = "Play/Stop Music",
     CurrentValue = false,
     Flag = "Toggle1",
@@ -260,10 +247,10 @@ local Toggle = Tab:CreateToggle({
     end,
 })
 
-local Slider = Tab:CreateSlider({
+local Slider = MusicTab:CreateSlider({
     Name = "Volume",
-    Range = {0, 1},
-    Increment = 0.1,
+    Range = {1, 100},
+    Increment = 1,
     Suffix = "%",
     CurrentValue = 1,
     Flag = "Slider1",
@@ -274,7 +261,7 @@ local Slider = Tab:CreateSlider({
     end,
 })
 
-local Slider = Tab:CreateSlider({
+local Slider = MusicTab:CreateSlider({
     Name = "Pitch",
     Range = {0.1, 2},
     Increment = 0.1,
