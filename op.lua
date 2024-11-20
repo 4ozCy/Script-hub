@@ -194,6 +194,8 @@ local Slider = Tab:CreateSlider({
 local MusicTab = Window:CreateTab("Music", "music")
 local Section = MusicTab:CreateSection("Music")
 
+local sound
+
 local Dropdown = MusicTab:CreateDropdown({
     Name = "Music List",
     Options = {"EHYUH", "Deja Vu", "Sinistra", "Chipi Chipi Chapa Chapa"},
@@ -218,7 +220,7 @@ local Dropdown = MusicTab:CreateDropdown({
             sound:Destroy()
         end
          
-                sound = Instance.new("Sound")
+        sound = Instance.new("Sound")
         sound.SoundId = soundId
         sound.Volume = VolumeSlider.CurrentValue
         sound.PlaybackSpeed = PitchSlider.CurrentValue
