@@ -192,11 +192,11 @@ local Slider = Tab:CreateSlider({
 })
 
 local MusicTab = Window:CreateTab("Music", "music")
-local Section = Tab:CreateSection("Music")
+local Section = MusicTab:CreateSection("Music")
 
 local Dropdown = MusicTab:CreateDropdown({
     Name = "Music List",
-    Options = {"Song 1", "Song 2", "Song 3", "Song 4"},
+    Options = {"EHYUH", "Deja Vu", "Sinistra", "Chipi Chipi Chapa Chapa"},
     CurrentOption = {"Song 1"},
     MultipleOptions = false,
     Flag = "Dropdown1",
@@ -204,20 +204,21 @@ local Dropdown = MusicTab:CreateDropdown({
         local selectedSong = Options[1]
         local soundId
         
-        if selectedSong == "Song 1" then
-            soundId = "rbxassetid://1234567890"
-        elseif selectedSong == "Song 2" then
-            soundId = "rbxassetid://2345678901"
-        elseif selectedSong == "Song 3" then
-            soundId = "rbxassetid://3456789012"
-        elseif selectedSong == "Song 4" then
-            soundId = "rbxassetid://4567890123"
+        if selectedSong == "EHYUH" then
+            soundId = "rbxassetid://16190782181"
+        elseif selectedSong == "Deja Vu" then
+            soundId = "rbxassetid://6781116057"
+        elseif selectedSong == "Sinistra" then
+            soundId = "rbxassetid://15689442662"
+        elseif selectedSong == "Chipi Chipi Chapa Chapa" then
+            soundId = "rbxassetid://16190783444"
         end
         
         if sound then
             sound:Stop()
         end
-
+         
+        local sound
         sound = Instance.new("Sound")
         sound.SoundId = soundId
         sound.Parent = game.Players.LocalPlayer.Character.HumanoidRootPart
