@@ -3,8 +3,8 @@ local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 local Window = Rayfield:CreateWindow({
    Name = "nozcy's hub",
    Icon = 0,
-   LoadingTitle = "booting this bad boy",
-   LoadingSubtitle = "by: nozcy",
+   LoadingTitle = "booting this bad boy up",
+   LoadingSubtitle = "Roblox: @nozcyy | Discord: @n.int",
    Theme = "Default",
    DisableRayfieldPrompts = false,
    DisableBuildWarnings = false,
@@ -191,92 +191,54 @@ local Slider = Tab:CreateSlider({
     end,
 })
 
-local MusicTab = Window:CreateTab("Music", "music")
-local Section = MusicTab:CreateSection("Music")
+local Section = Tab:CreateSection("Music")
 
-local sound
-
-local Dropdown = MusicTab:CreateDropdown({
-    Name = "Music List",
-    Options = {"EHYUH", "Deja Vu", "Sinistra", "Chipi Chipi Chapa Chapa"},
-    CurrentOption = {"EHYUH"},
-    MultipleOptions = false,
-    Flag = "Dropdown1",
-    Callback = function(Options)
-        local selectedSong = Options[1]
-        local soundId
-        
-        if selectedSong == "EHYUH" then
-            soundId = "rbxassetid://16190782181"
-        elseif selectedSong == "Deja Vu" then
-            soundId = "rbxassetid://6781116057"
-        elseif selectedSong == "Sinistra" then
-            soundId = "rbxassetid://15689442662"
-        elseif selectedSong == "Chipi Chipi Chapa Chapa" then
-            soundId = "rbxassetid://16190783444"
-        end
-        
-        if sound then
-            sound:Destroy()
-        end
-         
-        sound = Instance.new("Sound")
-        sound.SoundId = soundId
-        sound.Volume = VolumeSlider.CurrentValue
-        sound.PlaybackSpeed = PitchSlider.CurrentValue
-        sound.Parent = game.Players.LocalPlayer.Character.HumanoidRootPart
-        if PlayToggle.CurrentValue then
-        sound:Play()
-        end
-
-        Rayfield:Notify({
-            Title = "Music Player",
-            Content = "Now playing: " .. selectedSong,
-            Duration = 5,
-            Image = "music",
-        })
-    end,
-})
-
-local PlayToggle = MusicTab:CreateToggle({
-    Name = "Play/Stop Music",
+local Toggle = Tab:CreateToggle({
+    Name = "Play Random Music",
     CurrentValue = false,
     Flag = "Toggle1",
     Callback = function(Value)
+        local musicList = {
+            ["EHYUH!!"] = "rbxassetid://16190782181",
+            ["Deja Vu"] = "rbxassetid://6781116057",
+            ["Sinistra"] = "rbxassetid://15689442662",
+            ["Chipi Chipi Chapa Chapa"] = "rbxassetid://16190783444",
+        }
+
         if sound then
-            if Value then
-                sound:Play()
-            else
-                sound:Pause()
+            sound:Destroy()
+            sound = nil
+        end
+
+        if Value then
+            local musicNames = {}
+            for name in pairs(musicList) do
+                table.insert(musicNames, name)
             end
-        end
-    end,
-})
 
-local VolumeSlider = MusicTab:CreateSlider({
-    Name = "Volume",
-    Range = {1, 100},
-    Increment = 1,
-    Suffix = "%",
-    CurrentValue = 1,
-    Flag = "Slider1",
-    Callback = function(Value)
-        if sound then
-            sound.Volume = Value
-        end
-    end,
-})
+            local randomIndex = math.random(1, #musicNames)
+            local selectedSong = musicNames[randomIndex]
+            local soundId = musicList[selectedSong]
 
-local PitchSlider = MusicTab:CreateSlider({
-    Name = "Pitch",
-    Range = {0.1, 2},
-    Increment = 0.1,
-    Suffix = "x",
-    CurrentValue = 1,
-    Flag = "Slider2",
-    Callback = function(Value)
-        if sound then
-            sound.PlaybackSpeed = Value
+            sound = Instance.new("Sound")
+            sound.SoundId = soundId
+            sound.Volume = 1
+            sound.PlaybackSpeed = 1
+            sound.Parent = game:GetService("SoundService") -- Use SoundService for global audio
+            sound:Play()
+
+            Rayfield:Notify({
+                Title = "Music played",
+                Content = "Now playing: " .. selectedSong,
+                Duration = 5,
+                Image = "music",
+            })
+        else
+            Rayfield:Notify({
+                Title = "Music Stopped",
+                Duration = 5,
+                Image = "music",
+            })
         end
     end,
 })
