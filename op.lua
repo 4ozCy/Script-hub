@@ -4,7 +4,7 @@ local Window = Rayfield:CreateWindow({
    Name = "nozcy's hub",
    Icon = 0,
    LoadingTitle = "booting this bad boy up",
-   LoadingSubtitle = "Roblox: @nozcyy | Discord: @n.int",
+   LoadingSubtitle = "shhhhhhhh",
    Theme = "Default",
    DisableRayfieldPrompts = false,
    DisableBuildWarnings = false,
@@ -250,7 +250,7 @@ local Toggle = Tab:CreateToggle({
         local musicList = {
             ["EHYUH!!"] = "rbxassetid://16190782181",
             ["Deja Vu"] = "rbxassetid://6781116057",
-            ["Sinistra"] = "rbxassetid://15689442662",
+            ["Sinistra"] = "rbxassetid://15689443663",
             ["Chipi Chipi Chapa Chapa"] = "rbxassetid://16190783444",
         }
 
@@ -273,7 +273,7 @@ local Toggle = Tab:CreateToggle({
             sound.SoundId = soundId
             sound.Volume = 1
             sound.PlaybackSpeed = 1
-            sound.Parent = game:GetService("SoundService") -- Use SoundService for global audio
+            sound.Parent = game:GetService("SoundService")
             sound:Play()
 
             Rayfield:Notify({
