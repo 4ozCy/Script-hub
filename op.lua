@@ -5,7 +5,7 @@ local Window = Rayfield:CreateWindow({
    Icon = 0,
    LoadingTitle = "booting this bad boy up",
    LoadingSubtitle = "shhhhhhhh",
-   Theme = "Default",
+   Theme = "Ocean",
    DisableRayfieldPrompts = false,
    DisableBuildWarnings = false,
    ConfigurationSaving = {
@@ -152,7 +152,12 @@ local function serverHop()
     if #servers > 0 then
         TeleportService:TeleportToPlaceInstance(game.PlaceId, servers[1].id, LocalPlayer)
     else
-        warn("No available servers to hop to.")
+        Rayfield:Notify({
+   Title = "nozcy's hub",
+   Content = "no server available",
+   Duration = 4,
+   Image = "circle-x",
+})
     end
 end
          
@@ -174,7 +179,7 @@ local Button = Tab:CreateButton({
    Name = "Shift-lock",
    Callback = function()
    loadstring(game:HttpGet('https://pastebin.com/raw/CjNsnSDy'))()
-    end,
+   end,
 })
 
 local Toggle = Tab:CreateToggle({
@@ -268,7 +273,8 @@ local Toggle = Tab:CreateToggle({
             local randomIndex = math.random(1, #musicNames)
             local selectedSong = musicNames[randomIndex]
             local soundId = musicList[selectedSong]
-
+            
+            local sound
             sound = Instance.new("Sound")
             sound.SoundId = soundId
             sound.Volume = 1
