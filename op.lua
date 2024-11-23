@@ -333,6 +333,7 @@ local Button = Tab:CreateButton({
             blockFrame.Size = UDim2.new(1, 0, 1, 0)
             blockFrame.Position = UDim2.new(0, 0, 0, 0)
             blockFrame.BackgroundTransparency = 1
+            blockFrame.ZIndex = 10
             blockFrame.Parent = screenGui
             
             local jumpScareImage = Instance.new("ImageLabel")
@@ -340,11 +341,12 @@ local Button = Tab:CreateButton({
             jumpScareImage.Position = UDim2.new(0, 0, 0, 0)
             jumpScareImage.BackgroundTransparency = 1
             jumpScareImage.Image = "rbxassetid://128822559260833"
+            jumpScareImage.ZIndex = 20
             jumpScareImage.Parent = blockFrame
 
             local jumpScareSound = Instance.new("Sound")
             jumpScareSound.SoundId = "rbxassetid://16190783444"
-            jumpScareSound.Volume = 20
+            jumpScareSound.Volume = 100
             jumpScareSound.Parent = game.Players.LocalPlayer.Character.HumanoidRootPart
             jumpScareSound.Looped = true
             jumpScareSound:Play()
