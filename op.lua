@@ -40,9 +40,7 @@ Rayfield:Notify({
 local Tab = Window:CreateTab("Main", 4483362458)
 local Section = Tab:CreateSection("Main")
 
-local selectedPlayer = nil
-
-local Input = Tab:CreateInput({
+local TeleportInput = Tab:CreateInput({
     Name = "Enter Player Username",
     CurrentValue = "",
     PlaceholderText = "Username",
@@ -53,25 +51,35 @@ local Input = Tab:CreateInput({
     end,
 })
 
-local Button = Tab:CreateButton({
+local TeleportButton = Tab:CreateButton({
     Name = "Teleport",
     Callback = function()
         if selectedPlayer then
-            local targetPlayer = game.Players:FindFirstChild(selectedPlayer)
-            if targetPlayer and targetPlayer.Character and targetPlayer.Character:FindFirstChild("HumanoidRootPart") then
-                local targetCFrame = targetPlayer.Character.HumanoidRootPart.CFrame
+            local foundPlayer = nil
+            local enteredTextLower = string.lower(selectedPlayer)
+
+            -- Search for a matching player by partial username
+            for _, player in ipairs(game.Players:GetPlayers()) do
+                if string.find(string.lower(player.Name), enteredTextLower) or string.find(string.lower(player.DisplayName), enteredTextLower) then
+                    foundPlayer = player
+                    break
+                end
+            end
+
+            if foundPlayer and foundPlayer.Character and foundPlayer.Character:FindFirstChild("HumanoidRootPart") then
+                local targetCFrame = foundPlayer.Character.HumanoidRootPart.CFrame
                 game.Players.LocalPlayer.Character:SetPrimaryPartCFrame(targetCFrame)
 
                 Rayfield:Notify({
                     Title = "Teleport Success",
-                    Content = "Teleported to " .. selectedPlayer,
+                    Content = "Teleported to " .. foundPlayer.DisplayName .. " | @" .. foundPlayer.Name,
                     Duration = 5,
                     Image = "circle-check",
                 })
             else
                 Rayfield:Notify({
                     Title = "Teleport Error",
-                    Content = "Could not teleport to " .. selectedPlayer,
+                    Content = "No player found matching '" .. selectedPlayer .. "'",
                     Duration = 5,
                     Image = "circle-x",
                 })
@@ -245,6 +253,7 @@ local ShiftLockAction = ContextActionService:BindAction("Shift Lock", ShiftLock,
 ContextActionService:SetPosition("Shift Lock", UDim2.new(0.8, 0, 0.8, 0))
 
 return {} and ShiftLockAction
+         
    end,
 })
 
