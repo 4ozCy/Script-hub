@@ -42,15 +42,14 @@ local Section = Tab:CreateSection("Main")
 
 local selectedPlayer = nil
 
-local Dropdown = Tab:CreateDropdown({
-    Name = "Select Player",
-    Options = {},
-    CurrentOption = {},
-    MultipleOptions = false,
-    Flag = "TeleportDropdown",
-    Callback = function(playerInfo)
-        local username = playerInfo:match("| @(.*)")
-        selectedPlayer = username
+local Input = Tab:CreateInput({
+    Name = "Enter Player Username",
+    CurrentValue = "",
+    PlaceholderText = "Username",
+    RemoveTextAfterFocusLost = true,
+    Flag = "TeleportInput",
+    Callback = function(enteredText)
+        selectedPlayer = enteredText
     end,
 })
 
@@ -80,31 +79,13 @@ local Button = Tab:CreateButton({
         else
             Rayfield:Notify({
                 Title = "Teleport Error",
-                Content = "No player selected.",
+                Content = "No username entered.",
                 Duration = 5,
                 Image = "circle-x",
             })
         end
     end,
 })
-
-local function updatePlayerList()
-    local players = game.Players:GetPlayers()
-    local playerNames = {}
-    for _, player in ipairs(players) do
-        local displayName = player.DisplayName
-        local username = player.Name
-        table.insert(playerNames, displayName .. " | @" .. username)
-    end
-    PlayerDropdown:UpdateOptions(playerNames)
-end
-
-task.spawn(function()
-    while true do
-        updatePlayerList()
-        task.wait(0.5)
-    end
-end)
 
 local Button = Tab:CreateButton({
    Name = "aimbot & esp",
