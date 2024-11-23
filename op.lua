@@ -5,7 +5,7 @@ local Window = Rayfield:CreateWindow({
    Icon = 0,
    LoadingTitle = "booting this bad boy up",
    LoadingSubtitle = "shhhhhhhh",
-   Theme = "Ocean",
+   Theme = "Default",
    DisableRayfieldPrompts = false,
    DisableBuildWarnings = false,
    ConfigurationSaving = {
@@ -40,75 +40,71 @@ Rayfield:Notify({
 local Tab = Window:CreateTab("Main", 4483362458)
 local Section = Tab:CreateSection("Main")
 
-local dropdown = Tab:CreateDropdown({
-    Name = "Select Player to Teleport",
-    Options = (function()
-        local players = {}
-        for _, player in ipairs(game.Players:GetPlayers()) do
-            table.insert(players, player.Name)
-        end
-        return players
-    end)(),
-    CurrentOption = "",
+local selectedPlayer = nil
+
+local PlayerDropdown = Tab:CreateDropdown({
+    Name = "Select Player",
+    Options = {},
+    CurrentOption = {},
     MultipleOptions = false,
-    Flag = "PlayerDropdown",
-    Callback = function(selectedPlayer)
+    Flag = "TeleportDropdown",
+    Callback = function(playerInfo)
+        local username = playerInfo:match("| @(.*)")
+        selectedPlayer = username
     end,
 })
 
-game.Players.PlayerAdded:Connect(function()
-    local players = {}
-    for _, player in ipairs(game.Players:GetPlayers()) do
-        table.insert(players, player.Name)
-    end
-    dropdown:UpdateOptions(players)
-end)
-
-game.Players.PlayerRemoving:Connect(function()
-    local players = {}
-    for _, player in ipairs(game.Players:GetPlayers()) do
-        table.insert(players, player.Name)
-    end
-    dropdown:UpdateOptions(players)
-end)
-
-local Button = Tab:CreateButton({
+local TeleportButton = Tab:CreateButton({
     Name = "Teleport",
     Callback = function()
-        local selectedPlayer = dropdown.CurrentOption
-        local localPlayer = game.Players.LocalPlayer
-        local targetPlayer = game.Players:FindFirstChild(selectedPlayer)
-
-        if targetPlayer and targetPlayer.Character and targetPlayer.Character:FindFirstChild("HumanoidRootPart") then
-            local targetPosition = targetPlayer.Character.HumanoidRootPart.CFrame
-
-            if localPlayer.Character and localPlayer.Character:FindFirstChild("HumanoidRootPart") then
-                localPlayer.Character.HumanoidRootPart.CFrame = targetPosition
+        if selectedPlayer then
+            local targetPlayer = game.Players:FindFirstChild(selectedPlayer)
+            if targetPlayer and targetPlayer.Character and targetPlayer.Character:FindFirstChild("HumanoidRootPart") then
+                local targetCFrame = targetPlayer.Character.HumanoidRootPart.CFrame
+                game.Players.LocalPlayer.Character:SetPrimaryPartCFrame(targetCFrame)
 
                 Rayfield:Notify({
-                    Title = "Teleport Successful",
+                    Title = "Teleport Success",
                     Content = "Teleported to " .. selectedPlayer,
                     Duration = 5,
                     Image = "circle-check",
                 })
             else
                 Rayfield:Notify({
-                    Title = "Teleport Failed",
-                    Content = "Your character is not loaded.",
+                    Title = "Teleport Error",
+                    Content = "Could not teleport to " .. selectedPlayer,
                     Duration = 5,
                     Image = "circle-x",
                 })
             end
         else
             Rayfield:Notify({
-                Title = "Teleport Failed",
-                Content = "Player not found or target has no character.",
+                Title = "Teleport Error",
+                Content = "No player selected.",
                 Duration = 5,
                 Image = "circle-x",
             })
         end
     end,
 })
+
+local function updatePlayerList()
+    local players = game.Players:GetPlayers()
+    local playerNames = {}
+    for _, player in ipairs(players) do
+        local displayName = player.DisplayName
+        local username = player.Name
+        table.insert(playerNames, displayName .. " | @" .. username)
+    end
+    PlayerDropdown:UpdateOptions(playerNames)
+end
+
+task.spawn(function()
+    while true do
+        updatePlayerList()
+        task.wait(0.5)
+    end
+end)
 
 local Button = Tab:CreateButton({
    Name = "aimbot & esp",
@@ -241,60 +237,6 @@ local Slider = Tab:CreateSlider({
         local player = game.Players.LocalPlayer
         if player and player.Character and player.Character:FindFirstChild("Humanoid") then
             player.Character.Humanoid.JumpPower = Value
-        end
-    end,
-})
-
-local Section = Tab:CreateSection("Music")
-
-local Toggle = Tab:CreateToggle({
-    Name = "Play Random Music",
-    CurrentValue = false,
-    Flag = "Toggle1",
-    Callback = function(Value)
-        local musicList = {
-            ["EHYUH!!"] = "rbxassetid://16190782181",
-            ["Deja Vu"] = "rbxassetid://6781116057",
-            ["Sinistra"] = "rbxassetid://15689443663",
-            ["Chipi Chipi Chapa Chapa"] = "rbxassetid://16190783444",
-        }
-
-        if sound then
-            sound:Destroy()
-            sound = nil
-        end
-
-        if Value then
-            local musicNames = {}
-            for name in pairs(musicList) do
-                table.insert(musicNames, name)
-            end
-
-            local randomIndex = math.random(1, #musicNames)
-            local selectedSong = musicNames[randomIndex]
-            local soundId = musicList[selectedSong]
-            
-            local sound
-            sound = Instance.new("Sound")
-            sound.SoundId = soundId
-            sound.Volume = 1
-            sound.PlaybackSpeed = 1
-            sound.Parent = game:GetService("SoundService")
-            sound:Play()
-
-            Rayfield:Notify({
-                Title = "Music played",
-                Content = "Now playing: " .. selectedSong,
-                Duration = 5,
-                Image = "toggle-right",
-            })
-        else
-            Rayfield:Notify({
-                Title = "Music Stopped",
-                Content = "Now Stop playing: " .. selectedSong,
-                Duration = 5,
-                Image = "toggle-left",
-            })
         end
     end,
 })
