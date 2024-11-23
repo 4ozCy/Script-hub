@@ -42,7 +42,7 @@ local Section = Tab:CreateSection("Main")
 
 local selectedPlayer = nil
 
-local PlayerDropdown = Tab:CreateDropdown({
+local Dropdown = Tab:CreateDropdown({
     Name = "Select Player",
     Options = {},
     CurrentOption = {},
@@ -54,7 +54,7 @@ local PlayerDropdown = Tab:CreateDropdown({
     end,
 })
 
-local TeleportButton = Tab:CreateButton({
+local Button = Tab:CreateButton({
     Name = "Teleport",
     Callback = function()
         if selectedPlayer then
