@@ -2,7 +2,7 @@ local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
 local Window = Rayfield:CreateWindow({
    Name = "nozcy's hub",
-   Icon = 127882855326973,
+   Icon = 0,
    LoadingTitle = "booting this bad boy up",
    LoadingSubtitle = "shhhhhhhh",
    Theme = "Default",
