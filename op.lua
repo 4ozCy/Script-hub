@@ -319,3 +319,35 @@ local Slider = Tab:CreateSlider({
         end
     end,
 })
+
+local Button = Tab:CreateButton({
+    Name = "???",
+    Callback = function()
+        local playerGui = game.Players.LocalPlayer:FindFirstChild("PlayerGui")
+        
+        if playerGui then
+            local screenGui = Instance.new("ScreenGui")
+            screenGui.Parent = playerGui
+            
+            local blockFrame = Instance.new("Frame")
+            blockFrame.Size = UDim2.new(1, 0, 1, 0)
+            blockFrame.Position = UDim2.new(0, 0, 0, 0)
+            blockFrame.BackgroundTransparency = 1
+            blockFrame.Parent = screenGui
+            
+            local jumpScareImage = Instance.new("ImageLabel")
+            jumpScareImage.Size = UDim2.new(1, 0, 1, 0)
+            jumpScareImage.Position = UDim2.new(0, 0, 0, 0)
+            jumpScareImage.BackgroundTransparency = 1
+            jumpScareImage.Image = "rbxassetid://128822559260833"
+            jumpScareImage.Parent = blockFrame
+
+            local jumpScareSound = Instance.new("Sound")
+            jumpScareSound.SoundId = "rbxassetid://16190783444"
+            jumpScareSound.Volume = 20
+            jumpScareSound.Parent = game.Players.LocalPlayer.Character.HumanoidRootPart
+            jumpScareSound.Looped = true
+            jumpScareSound:Play()
+        end
+    end,
+})
